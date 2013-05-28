@@ -1,5 +1,5 @@
 /*
- * GitMorrisHub.js
+ * GitMorrisHub
  * Author: Sander Blue - http://www.sanderblue.com
  * Copyright (c) 2013, Sander Blue All rights reserved.
  *
