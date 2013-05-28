@@ -3,6 +3,8 @@
  * Author: Sander Blue - http://www.sanderblue.com
  * Copyright (c) 2013, Sander Blue All rights reserved.
  *
+ * Notes: Additional features/upgrades, such as scalable OOP, will be added if/when time allows.
+ *
  * Morris.js by Olly Smith - http://www.oesmith.co.uk/morris.js/
  */
 
