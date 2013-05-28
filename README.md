@@ -4,7 +4,7 @@ This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesm
 
 Check out the [GitHub Developer API Documentation](http://developer.github.com/) for help creating your own line charts.
 
-Status: Work In Progress.
+Status: Working, but also a work in progress.
 
 Dependencies
 ============
