@@ -24,8 +24,20 @@ $(function () {
     cache: true,
     success: function (data) {
 
-      // Index 51 = the current week based off current UTC time
+      // This particular URL returns a response of all commits
+      // on a user's repo over the past year ending with today.
+      // The call is organized into an array of 52 weeks, with
+      // week 52 being the current week (this week). Each week
+      // contains an array of the number of commits a per day on
+      // that repo. "data[51]" is the 52nd week of the past year
+
+      // Example request for getting data[32].days (commits per day for week 33 of the past year)
+      // Returns a response of an array[7] = [8, 1, 3, 2, 6, 7, 6]
+      // Sunday's commit count = 8, Monday's commit count = 1, and so on...
+
       var weekDays = data[51].days;
+
+      console.log(data[51].days); // this week's array of commits
 
       var day_data = [
         {"dayOfWeek": "S", "commits": weekDays[0]},
@@ -52,7 +64,7 @@ $(function () {
         smooth: true,
         continuousLine: true,
         hideHover: true,
-        parseTime: false
+        parseTime: false // Turns of auto time parsing of the x-axis values
       });
 
     }
