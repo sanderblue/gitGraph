@@ -22,7 +22,7 @@ $(function () {
     cache: true,
     success: function (data) {
 
-      // Index 51 = the current week base of UTC time
+      // Index 51 = the current week based off current UTC time
       var weekDays = data[51].days;
 
       var day_data = [
