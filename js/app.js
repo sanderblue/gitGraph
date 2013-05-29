@@ -37,7 +37,7 @@ $(function () {
 
       var weekDays = data[51].days;
 
-      console.log(data[51].days); // this week's array of commits
+      // console.log(data[51].days); // this week's array of commits
 
       var day_data = [
         {"dayOfWeek": "S", "commits": weekDays[0]},
@@ -64,6 +64,7 @@ $(function () {
         smooth: true,
         continuousLine: true,
         hideHover: true,
+        gridTextSize: 10,
         parseTime: false // Turns of auto time parsing of the x-axis values
       });
 
