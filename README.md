@@ -1,6 +1,6 @@
-GitMorrisHub
-============
-This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with the most recent week's number of commits per day per specified user's repo. Currently the chart is a static Sunday to Satuday setup [S, M, T, W, T, F, S] with each day's number of commits displayed along the line chart.
+gitGraph
+========
+This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), [Moment.js](http://momentjs.com/) and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with a specified repo's commits over the last 7 days.
 
 Check out the [GitHub Developer API Documentation](http://developer.github.com/) for help creating your own line charts.
 
@@ -11,6 +11,7 @@ Dependencies
 [jQuery](http://jquery.com/),
 [Raphael.js](http://raphaeljs.com/),
 [Morris.js](http://oesmith.github.com/morris.js/)
+[Moment.js](http://momentjs.com/)
 
 Usage
 =====

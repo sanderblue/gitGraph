@@ -1,21 +1,6 @@
 $(function () {
 
-  /*
-   * Date Prototype Tests
-   */
-  Date.prototype.getWeek = function() {
-    var onejan = new Date(this.getFullYear(),0,1);
-    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
-  }
-  var commits = [
-      0,
-      3,
-      26,
-      20,
-      39,
-      1,
-      0
-    ];
+  var commits = [0,3,26,20,39,1,0];
 
   // Uses Moment.js to put the weekdays in reverse chronological order started with today.
   var thisWeeksDays = new Array();
@@ -74,7 +59,5 @@ $(function () {
     gridTextSize: 10,
     parseTime: false // Turns of auto time parsing of the x-axis values
   });
-
-  var newCommits = [];
 
 });
