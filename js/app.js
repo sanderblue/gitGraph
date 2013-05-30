@@ -30,8 +30,13 @@ $(function () {
       var lastlastWeek  = data[49].days;
       var threeWeeks    = thisWeek.concat(lastWeek, lastlastWeek);
       var dayIndex      = new Date().getDay();
-      var prevSevenDays = threeWeeks.slice(dayIndex);
-      var commits       = prevSevenDays;
+      var prevDays      = threeWeeks.slice(dayIndex, dayIndex[dayIndex + 1],dayIndex[dayIndex + 2],dayIndex[dayIndex + 3],dayIndex[dayIndex + 4],dayIndex[dayIndex + 5], dayIndex[dayIndex + 6] );
+      var commits       = prevDays;
+      console.log(dayIndex);
+      console.log(thisWeek);
+      console.log(threeWeeks);
+      console.log(commits);
+
 
       // This particular URL returns a response of all commits
       // on a user's repo over the past year ending with today.
