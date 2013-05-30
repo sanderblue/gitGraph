@@ -24,7 +24,7 @@ $(function () {
     dataType: 'json',
     cache: true,
     success: function (data) {
-
+      console.log(data);
       // This particular URL returns a response of all commits
       // on a user's repo over the past year ending with today.
       // The call is organized into an array of 52 weeks, with
@@ -35,20 +35,48 @@ $(function () {
       // Example request for getting data[32].days (commits per day for week 33 of the past year)
       // Returns a response of an array[7] = [8, 1, 3, 2, 6, 7, 6]
       // Sunday's commit count = 8, Monday's commit count = 1, and so on...
+      var commits = data[51].days;
 
-      var weekDays = data[51].days;
+      // var commits = [0,3,26,20,39,1,0];
 
-      // console.log(data[51].days); // this week's array of commits
+      // Uses Moment.js to put the weekdays in reverse chronological order started with today.
+      var thisWeeksDays = new Array();
+        thisWeeksDays[0] = moment().format('ddd');
+        thisWeeksDays[1] = moment().subtract('days', 1).format('ddd');
+        thisWeeksDays[2] = moment().subtract('days', 2).format('ddd');
+        thisWeeksDays[3] = moment().subtract('days', 3).format('ddd');
+        thisWeeksDays[4] = moment().subtract('days', 4).format('ddd');
+        thisWeeksDays[5] = moment().subtract('days', 5).format('ddd');
+        thisWeeksDays[6] = moment().subtract('days', 6).format('ddd');
+      // console.log(thisWeeksDays);
+
+      var days = new Array();
+        days[0] = moment().format('d');
+        days[1] = moment().subtract('days', 1).format('d');
+        days[2] = moment().subtract('days', 2).format('d');
+        days[3] = moment().subtract('days', 3).format('d');
+        days[4] = moment().subtract('days', 4).format('d');
+        days[5] = moment().subtract('days', 5).format('d');
+        days[6] = moment().subtract('days', 6).format('d');
+
+      var d1 = days[0];
+      var d2 = days[1];
+      var d3 = days[2];
+      var d4 = days[3];
+      var d5 = days[4];
+      var d6 = days[5];
+      var d7 = days[6];
 
       var day_data = [
-        {"dayOfWeek": "S", "commits": weekDays[0]},
-        {"dayOfWeek": "M", "commits": weekDays[1]},
-        {"dayOfWeek": "T", "commits": weekDays[2]},
-        {"dayOfWeek": "W", "commits": weekDays[3]},
-        {"dayOfWeek": "T", "commits": weekDays[4]},
-        {"dayOfWeek": "F", "commits": weekDays[5]},
-        {"dayOfWeek": "S", "commits": weekDays[6]}
+        { "dayOfWeek": thisWeeksDays[0], "commits": commits[d1] },
+        { "dayOfWeek": thisWeeksDays[1], "commits": commits[d2] },
+        { "dayOfWeek": thisWeeksDays[2], "commits": commits[d3] },
+        { "dayOfWeek": thisWeeksDays[3], "commits": commits[d4] },
+        { "dayOfWeek": thisWeeksDays[4], "commits": commits[d5] },
+        { "dayOfWeek": thisWeeksDays[5], "commits": commits[d6] },
+        { "dayOfWeek": thisWeeksDays[6], "commits": commits[d7] }
       ];
+      console.log(day_data);
 
       // Set your desired options for your Morris.js line-chart
       Morris.Line({
@@ -68,8 +96,7 @@ $(function () {
         gridTextSize: 10,
         parseTime: false // Turns of auto time parsing of the x-axis values
       });
-
     }
-  });
 
+  });
 });
