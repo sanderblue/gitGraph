@@ -15,8 +15,8 @@ $(function () {
   // GET repo commits per week over the last year. The year time range ends with today.
   // Example URL call = https://api.github.com/repos/:owner/:repo/stats/commit_activity
 
-  var user = 'github'; // change to this to the desired username
-  var repo = 'developer.github.com'; // change to this to the desired repo of the specified user
+  var user = 'sanderblue'; // change to this to the desired username
+  var repo = 'gitGraph'; // change to this to the desired repo of the specified user
   var statsURL = 'https://api.github.com/repos/'+ user +'/'+ repo +'/stats/commit_activity';
 
   $.ajax({
@@ -24,7 +24,15 @@ $(function () {
     dataType: 'json',
     cache: true,
     success: function (data) {
-      console.log(data);
+
+      var thisWeek      = data[51].days;
+      var lastWeek      = data[50].days;
+      var lastlastWeek  = data[49].days;
+      var threeWeeks    = thisWeek.concat(lastWeek, lastlastWeek);
+      var dayIndex      = new Date().getDay();
+      var prevSevenDays = threeWeeks.slice(dayIndex);
+      var commits       = prevSevenDays;
+
       // This particular URL returns a response of all commits
       // on a user's repo over the past year ending with today.
       // The call is organized into an array of 52 weeks, with
@@ -35,9 +43,7 @@ $(function () {
       // Example request for getting data[32].days (commits per day for week 33 of the past year)
       // Returns a response of an array[7] = [8, 1, 3, 2, 6, 7, 6]
       // Sunday's commit count = 8, Monday's commit count = 1, and so on...
-      var commits = data[51].days;
-
-      // var commits = [0,3,26,20,39,1,0];
+      // var commits = data[51].days;
 
       // Uses Moment.js to put the weekdays in reverse chronological order started with today.
       var thisWeeksDays = new Array();
@@ -48,7 +54,6 @@ $(function () {
         thisWeeksDays[4] = moment().subtract('days', 4).format('ddd');
         thisWeeksDays[5] = moment().subtract('days', 5).format('ddd');
         thisWeeksDays[6] = moment().subtract('days', 6).format('ddd');
-      // console.log(thisWeeksDays);
 
       var days = new Array();
         days[0] = moment().format('d');
@@ -68,15 +73,15 @@ $(function () {
       var d7 = days[6];
 
       var day_data = [
-        { "dayOfWeek": thisWeeksDays[0], "commits": commits[d1] },
-        { "dayOfWeek": thisWeeksDays[1], "commits": commits[d2] },
-        { "dayOfWeek": thisWeeksDays[2], "commits": commits[d3] },
+        { "dayOfWeek": thisWeeksDays[0], "commits": commits[d7] },
+        { "dayOfWeek": thisWeeksDays[1], "commits": commits[d6] },
+        { "dayOfWeek": thisWeeksDays[2], "commits": commits[d5] },
         { "dayOfWeek": thisWeeksDays[3], "commits": commits[d4] },
-        { "dayOfWeek": thisWeeksDays[4], "commits": commits[d5] },
-        { "dayOfWeek": thisWeeksDays[5], "commits": commits[d6] },
-        { "dayOfWeek": thisWeeksDays[6], "commits": commits[d7] }
+        { "dayOfWeek": thisWeeksDays[4], "commits": commits[d3] },
+        { "dayOfWeek": thisWeeksDays[5], "commits": commits[d2] },
+        { "dayOfWeek": thisWeeksDays[6], "commits": commits[d1] }
       ];
-      console.log(day_data);
+      // console.log(day_data);
 
       // Set your desired options for your Morris.js line-chart
       Morris.Line({
