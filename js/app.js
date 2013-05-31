@@ -32,17 +32,13 @@ $(function () {
       // contains an array of the number of commits a per day on
       // that repo. "data[51]" is the 52nd week of the past year
 
-      // Example request for getting data[32].days (commits per day for week 33 of the past year)
-      // Returns a response of an array[7] = [8, 1, 3, 2, 6, 7, 6]
-      // Sunday's commit count = 8, Monday's commit count = 1, and so on...
+      // Get data[32].days (commits per day for week 33 of the past year)
+      // Might returns a response as follows: [8, 1, 3, 2, 6, 7, 6]
+      // In this case, Sunday's commit count = 8, Monday's commit count = 1, and so on...
 
       var commits = data[51].days;
-      // console.log(commits);
-
       var g = [];
       var f = { g : g }
-
-      // console.log(f);
 
       // Uses Moment.js to put the weekdays in reverse chronological order started with today.
       var thisWeeksDays = new Array(7);
@@ -53,8 +49,10 @@ $(function () {
         thisWeeksDays[4] = moment().utc().subtract('days', 4).format('ddd');
         thisWeeksDays[5] = moment().utc().subtract('days', 5).format('ddd');
         thisWeeksDays[6] = moment().utc().subtract('days', 6).format('ddd');
-      // console.log(thisWeeksDays);
 
+      // Uses Moment.js to create an array of values in the
+      // proper order based on the current day of the week.
+      // Used to resort the commits array based on the current day of the week.
       var newWeekIndex = new Array(7);
         newWeekIndex[0] = moment().utc().format('d');
         newWeekIndex[1] = moment().utc().subtract('days', 1).format('d');
@@ -63,7 +61,6 @@ $(function () {
         newWeekIndex[4] = moment().utc().subtract('days', 4).format('d');
         newWeekIndex[5] = moment().utc().subtract('days', 5).format('d');
         newWeekIndex[6] = moment().utc().subtract('days', 6).format('d');
-      console.log(newWeekIndex);
 
       $.each(newWeekIndex, function (k, v) {
         g.push(v);
@@ -78,7 +75,6 @@ $(function () {
         { "dayOfWeek": thisWeeksDays[1], "commits": commits[g[1]] },
         { "dayOfWeek": thisWeeksDays[0], "commits": commits[g[0]] }
       ];
-      // console.log(day_data);
 
       // Set your desired options for your Morris.js line-chart
       Morris.Line({
@@ -96,7 +92,7 @@ $(function () {
         continuousLine: true,
         hideHover: true,
         gridTextSize: 10,
-        parseTime: false // Turns of auto time parsing of the x-axis values
+        parseTime: false // Turns off auto time parsing of the x-axis values
       });
     }
 
