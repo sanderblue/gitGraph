@@ -77,7 +77,6 @@ $(function () {
         { "dayOfWeek": thisWeeksDays[1], "commits": commits[g[1]] },
         { "dayOfWeek": thisWeeksDays[0], "commits": commits[g[0]] }
       ];
-
       console.log(day_data);
 
       // Set your desired options for your Morris.js line-chart
