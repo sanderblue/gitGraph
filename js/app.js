@@ -43,12 +43,8 @@ $(function () {
       var f = { g : g }
       console.log(f);
 
-      $.each(commits, function (k, v) {
-        g.push(v);
-      });
-
       // Uses Moment.js to put the weekdays in reverse chronological order started with today.
-      var thisWeeksDays = new Array();
+      var thisWeeksDays = new Array(7);
         thisWeeksDays[0] = moment().utc().format('ddd');
         thisWeeksDays[1] = moment().utc().subtract('days', 1).format('ddd');
         thisWeeksDays[2] = moment().utc().subtract('days', 2).format('ddd');
@@ -56,9 +52,9 @@ $(function () {
         thisWeeksDays[4] = moment().utc().subtract('days', 4).format('ddd');
         thisWeeksDays[5] = moment().utc().subtract('days', 5).format('ddd');
         thisWeeksDays[6] = moment().utc().subtract('days', 6).format('ddd');
-      console.log(thisWeeksDays);
+      // console.log(thisWeeksDays);
 
-      var newWeekIndex = new Array();
+      var newWeekIndex = new Array(7);
         newWeekIndex[0] = moment().utc().format('d');
         newWeekIndex[1] = moment().utc().subtract('days', 1).format('d');
         newWeekIndex[2] = moment().utc().subtract('days', 2).format('d');
@@ -66,7 +62,11 @@ $(function () {
         newWeekIndex[4] = moment().utc().subtract('days', 4).format('d');
         newWeekIndex[5] = moment().utc().subtract('days', 5).format('d');
         newWeekIndex[6] = moment().utc().subtract('days', 6).format('d');
-      // console.log(newWeekIndex);
+      console.log(newWeekIndex);
+
+      $.each(newWeekIndex, function (k, v) {
+        g.push(v);
+      });
 
       var day_data = [
         { "dayOfWeek": thisWeeksDays[6], "commits": commits[g[6]] },
