@@ -49,23 +49,23 @@ $(function () {
 
       // Uses Moment.js to put the weekdays in reverse chronological order started with today.
       var thisWeeksDays = new Array();
-        thisWeeksDays[0] = moment().format('ddd');
-        thisWeeksDays[1] = moment().subtract('days', 1).format('ddd');
-        thisWeeksDays[2] = moment().subtract('days', 2).format('ddd');
-        thisWeeksDays[3] = moment().subtract('days', 3).format('ddd');
-        thisWeeksDays[4] = moment().subtract('days', 4).format('ddd');
-        thisWeeksDays[5] = moment().subtract('days', 5).format('ddd');
-        thisWeeksDays[6] = moment().subtract('days', 6).format('ddd');
+        thisWeeksDays[0] = moment().utc().format('ddd');
+        thisWeeksDays[1] = moment().utc().subtract('days', 1).format('ddd');
+        thisWeeksDays[2] = moment().utc().subtract('days', 2).format('ddd');
+        thisWeeksDays[3] = moment().utc().subtract('days', 3).format('ddd');
+        thisWeeksDays[4] = moment().utc().subtract('days', 4).format('ddd');
+        thisWeeksDays[5] = moment().utc().subtract('days', 5).format('ddd');
+        thisWeeksDays[6] = moment().utc().subtract('days', 6).format('ddd');
       console.log(thisWeeksDays);
 
       var newWeekIndex = new Array();
-        newWeekIndex[0] = moment().format('d');
-        newWeekIndex[1] = moment().subtract('days', 1).format('d');
-        newWeekIndex[2] = moment().subtract('days', 2).format('d');
-        newWeekIndex[3] = moment().subtract('days', 3).format('d');
-        newWeekIndex[4] = moment().subtract('days', 4).format('d');
-        newWeekIndex[5] = moment().subtract('days', 5).format('d');
-        newWeekIndex[6] = moment().subtract('days', 6).format('d');
+        newWeekIndex[0] = moment().utc().format('d');
+        newWeekIndex[1] = moment().utc().subtract('days', 1).format('d');
+        newWeekIndex[2] = moment().utc().subtract('days', 2).format('d');
+        newWeekIndex[3] = moment().utc().subtract('days', 3).format('d');
+        newWeekIndex[4] = moment().utc().subtract('days', 4).format('d');
+        newWeekIndex[5] = moment().utc().subtract('days', 5).format('d');
+        newWeekIndex[6] = moment().utc().subtract('days', 6).format('d');
       // console.log(newWeekIndex);
 
       var day_data = [
