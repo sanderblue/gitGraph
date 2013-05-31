@@ -1,6 +1,10 @@
 $(function () {
 
-  var commits = [0,3,26,20,39,1,0];
+  var commits = [0, 1, 2, 3, 4, 5, 6];
+  var dayIndex = new Date().getDay();
+  var thisWeek = ["Sun0","Mon1","Tues2","Wed3","Thu4","Fri5","Sat6"];
+  var lastWeek = ["Sun0","Mon1","Tues2","Wed3","Thu4","Fri5","Sat6"];
+  var lastLastWeek = ["Sun0","Mon1","Tues2","Wed3","Thu4","Fri5","Sat6"];
 
   // Uses Moment.js to put the weekdays in reverse chronological order started with today.
   var thisWeeksDays = new Array();
@@ -11,33 +15,43 @@ $(function () {
     thisWeeksDays[4] = moment().subtract('days', 4).format('ddd');
     thisWeeksDays[5] = moment().subtract('days', 5).format('ddd');
     thisWeeksDays[6] = moment().subtract('days', 6).format('ddd');
-  // console.log(thisWeeksDays);
+  console.log(thisWeeksDays);
 
-  var days = new Array();
-    days[0] = moment().format('d');
-    days[1] = moment().subtract('days', 1).format('d');
-    days[2] = moment().subtract('days', 2).format('d');
-    days[3] = moment().subtract('days', 3).format('d');
-    days[4] = moment().subtract('days', 4).format('d');
-    days[5] = moment().subtract('days', 5).format('d');
-    days[6] = moment().subtract('days', 6).format('d');
+  var newWeekIndex = new Array();
+    newWeekIndex[0] = moment().format('d');
+    newWeekIndex[1] = moment().subtract('days', 1).format('d');
+    newWeekIndex[2] = moment().subtract('days', 2).format('d');
+    newWeekIndex[3] = moment().subtract('days', 3).format('d');
+    newWeekIndex[4] = moment().subtract('days', 4).format('d');
+    newWeekIndex[5] = moment().subtract('days', 5).format('d');
+    newWeekIndex[6] = moment().subtract('days', 6).format('d');
+  // console.log(newWeekIndex);
 
-  var d1 = days[0];
-  var d2 = days[1];
-  var d3 = days[2];
-  var d4 = days[3];
-  var d5 = days[4];
-  var d6 = days[5];
-  var d7 = days[6];
+  var j = $.map(newWeekIndex, function(value) {
+    return value;
+  });
+  // console.log(j);
+
+  var g = [];
+  var f = { g : g }
+  console.log(f);
+
+  $.each(newWeekIndex, function (k, v) {
+    g.push(v);
+  });
+  // console.log(g);
+
+  var d1 = g[0];
+  // console.log(d1);
 
   var day_data = [
-    { "dayOfWeek": thisWeeksDays[0], "commits": commits[d1] },
-    { "dayOfWeek": thisWeeksDays[1], "commits": commits[d2] },
-    { "dayOfWeek": thisWeeksDays[2], "commits": commits[d3] },
-    { "dayOfWeek": thisWeeksDays[3], "commits": commits[d4] },
-    { "dayOfWeek": thisWeeksDays[4], "commits": commits[d5] },
-    { "dayOfWeek": thisWeeksDays[5], "commits": commits[d6] },
-    { "dayOfWeek": thisWeeksDays[6], "commits": commits[d7] }
+    { "dayOfWeek": thisWeeksDays[6], "commits": commits[g[6]] },
+    { "dayOfWeek": thisWeeksDays[5], "commits": commits[g[5]] },
+    { "dayOfWeek": thisWeeksDays[4], "commits": commits[g[4]] },
+    { "dayOfWeek": thisWeeksDays[3], "commits": commits[g[3]] },
+    { "dayOfWeek": thisWeeksDays[2], "commits": commits[g[2]] },
+    { "dayOfWeek": thisWeeksDays[1], "commits": commits[g[1]] },
+    { "dayOfWeek": thisWeeksDays[0], "commits": commits[g[0]] }
   ];
   console.log(day_data);
 

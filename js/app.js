@@ -25,19 +25,6 @@ $(function () {
     cache: true,
     success: function (data) {
 
-      var thisWeek      = data[51].days;
-      var lastWeek      = data[50].days;
-      var lastlastWeek  = data[49].days;
-      var threeWeeks    = thisWeek.concat(lastWeek, lastlastWeek);
-      var dayIndex      = new Date().getDay();
-      var prevDays      = threeWeeks.slice(dayIndex, dayIndex[dayIndex + 1],dayIndex[dayIndex + 2],dayIndex[dayIndex + 3],dayIndex[dayIndex + 4],dayIndex[dayIndex + 5], dayIndex[dayIndex + 6] );
-      var commits       = prevDays;
-      console.log(dayIndex);
-      console.log(thisWeek);
-      console.log(threeWeeks);
-      console.log(commits);
-
-
       // This particular URL returns a response of all commits
       // on a user's repo over the past year ending with today.
       // The call is organized into an array of 52 weeks, with
@@ -48,7 +35,17 @@ $(function () {
       // Example request for getting data[32].days (commits per day for week 33 of the past year)
       // Returns a response of an array[7] = [8, 1, 3, 2, 6, 7, 6]
       // Sunday's commit count = 8, Monday's commit count = 1, and so on...
-      // var commits = data[51].days;
+
+      var commits = data[51].days;
+      console.log(commits);
+
+      var g = [];
+      var f = { g : g }
+      console.log(f);
+
+      $.each(commits, function (k, v) {
+        g.push(v);
+      });
 
       // Uses Moment.js to put the weekdays in reverse chronological order started with today.
       var thisWeeksDays = new Array();
@@ -59,34 +56,28 @@ $(function () {
         thisWeeksDays[4] = moment().subtract('days', 4).format('ddd');
         thisWeeksDays[5] = moment().subtract('days', 5).format('ddd');
         thisWeeksDays[6] = moment().subtract('days', 6).format('ddd');
+      console.log(thisWeeksDays);
 
-      var days = new Array();
-        days[0] = moment().format('d');
-        days[1] = moment().subtract('days', 1).format('d');
-        days[2] = moment().subtract('days', 2).format('d');
-        days[3] = moment().subtract('days', 3).format('d');
-        days[4] = moment().subtract('days', 4).format('d');
-        days[5] = moment().subtract('days', 5).format('d');
-        days[6] = moment().subtract('days', 6).format('d');
-
-      var d1 = days[0];
-      var d2 = days[1];
-      var d3 = days[2];
-      var d4 = days[3];
-      var d5 = days[4];
-      var d6 = days[5];
-      var d7 = days[6];
+      var newWeekIndex = new Array();
+        newWeekIndex[0] = moment().format('d');
+        newWeekIndex[1] = moment().subtract('days', 1).format('d');
+        newWeekIndex[2] = moment().subtract('days', 2).format('d');
+        newWeekIndex[3] = moment().subtract('days', 3).format('d');
+        newWeekIndex[4] = moment().subtract('days', 4).format('d');
+        newWeekIndex[5] = moment().subtract('days', 5).format('d');
+        newWeekIndex[6] = moment().subtract('days', 6).format('d');
+      // console.log(newWeekIndex);
 
       var day_data = [
-        { "dayOfWeek": thisWeeksDays[0], "commits": commits[d7] },
-        { "dayOfWeek": thisWeeksDays[1], "commits": commits[d6] },
-        { "dayOfWeek": thisWeeksDays[2], "commits": commits[d5] },
-        { "dayOfWeek": thisWeeksDays[3], "commits": commits[d4] },
-        { "dayOfWeek": thisWeeksDays[4], "commits": commits[d3] },
-        { "dayOfWeek": thisWeeksDays[5], "commits": commits[d2] },
-        { "dayOfWeek": thisWeeksDays[6], "commits": commits[d1] }
+        { "dayOfWeek": thisWeeksDays[6], "commits": commits[g[6]] },
+        { "dayOfWeek": thisWeeksDays[5], "commits": commits[g[5]] },
+        { "dayOfWeek": thisWeeksDays[4], "commits": commits[g[4]] },
+        { "dayOfWeek": thisWeeksDays[3], "commits": commits[g[3]] },
+        { "dayOfWeek": thisWeeksDays[2], "commits": commits[g[2]] },
+        { "dayOfWeek": thisWeeksDays[1], "commits": commits[g[1]] },
+        { "dayOfWeek": thisWeeksDays[0], "commits": commits[g[0]] }
       ];
-      // console.log(day_data);
+      console.log(day_data);
 
       // Set your desired options for your Morris.js line-chart
       Morris.Line({
