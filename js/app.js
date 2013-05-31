@@ -37,11 +37,12 @@ $(function () {
       // Sunday's commit count = 8, Monday's commit count = 1, and so on...
 
       var commits = data[51].days;
-      console.log(commits);
+      // console.log(commits);
 
       var g = [];
       var f = { g : g }
-      console.log(f);
+
+      // console.log(f);
 
       // Uses Moment.js to put the weekdays in reverse chronological order started with today.
       var thisWeeksDays = new Array(7);
@@ -77,7 +78,7 @@ $(function () {
         { "dayOfWeek": thisWeeksDays[1], "commits": commits[g[1]] },
         { "dayOfWeek": thisWeeksDays[0], "commits": commits[g[0]] }
       ];
-      console.log(day_data);
+      // console.log(day_data);
 
       // Set your desired options for your Morris.js line-chart
       Morris.Line({
