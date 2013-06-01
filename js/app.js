@@ -15,14 +15,13 @@ $(function () {
   // GET repo commits per week over the last year. The year time range ends with today.
   // Example URL call = https://api.github.com/repos/:owner/:repo/stats/commit_activity
 
-  var user = 'sanderblue'; // change to this to the desired username
-  var repo = 'gitGraph'; // change to this to the desired repo of the specified user
+  var user = 'zurb'; // change to this to the desired username
+  var repo = 'foundation'; // change to this to the desired repo of the specified user
   var statsURL = 'https://api.github.com/repos/'+ user +'/'+ repo +'/stats/commit_activity';
 
   $.ajax({
     url: statsURL,
     dataType: 'json',
-    cache: true,
     success: function (data) {
 
       // This particular URL returns a response of all commits
@@ -63,7 +62,7 @@ $(function () {
         newWeekIndex[6] = moment().utc().subtract('days', 6).format('d');
 
       $.each(newWeekIndex, function (k, v) {
-        g.push(v);
+        g.push(v); // push new values to array g
       });
 
       var day_data = [
