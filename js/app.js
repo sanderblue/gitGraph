@@ -11,8 +11,6 @@
 
 $(function () {
 
-  var blah;
-
   // GitHub API
   // GET repo commits per week over the last year. The year time range ends with today.
   // Example URL call = https://api.github.com/repos/:owner/:repo/stats/commit_activity
