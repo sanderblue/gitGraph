@@ -91,3 +91,25 @@
     };
 
 }( jQuery ));
+
+// Uses Moment.js to put the weekdays in reverse chronological order started with today.
+              var thisWeeksDays = new Array(7);
+                thisWeeksDays[0] = moment().utc().format('ddd');
+                thisWeeksDays[1] = moment().utc().subtract('days', 1).format('ddd');
+                thisWeeksDays[2] = moment().utc().subtract('days', 2).format('ddd');
+                thisWeeksDays[3] = moment().utc().subtract('days', 3).format('ddd');
+                thisWeeksDays[4] = moment().utc().subtract('days', 4).format('ddd');
+                thisWeeksDays[5] = moment().utc().subtract('days', 5).format('ddd');
+                thisWeeksDays[6] = moment().utc().subtract('days', 6).format('ddd');
+
+              // Uses Moment.js to create an array of values in the
+              // proper order based on the current day of the week.
+              // Used to resort the commits array based on the current day of the week.
+              var newWeekIndex = new Array(7);
+                newWeekIndex[0] = moment().utc().format('d');
+                newWeekIndex[1] = moment().utc().subtract('days', 1).format('d');
+                newWeekIndex[2] = moment().utc().subtract('days', 2).format('d');
+                newWeekIndex[3] = moment().utc().subtract('days', 3).format('d');
+                newWeekIndex[4] = moment().utc().subtract('days', 4).format('d');
+                newWeekIndex[5] = moment().utc().subtract('days', 5).format('d');
+                newWeekIndex[6] = moment().utc().subtract('days', 6).format('d');

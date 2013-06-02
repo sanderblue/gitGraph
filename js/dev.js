@@ -13,7 +13,7 @@ $(document).ready(function() {
     $( "#test" ).gitGraph({
         user: "Theo",
         repo: "Outside",
-        gitData: newData
+        // gitData: newData
     });
 
 });
