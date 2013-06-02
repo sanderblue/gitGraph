@@ -8,7 +8,7 @@
 
 (function($) {
 
-    var commit_data = [
+    var test_data = [
         { "dayOfWeek": 1, "commits": 100 },
         { "dayOfWeek": 1, "commits": 75 },
         { "dayOfWeek": 1, "commits": 50 },
@@ -18,27 +18,52 @@
         { "dayOfWeek": 1, "commits": 100 }
     ];
 
-    // function getCommitsData() {
 
-        var user = 'zurb'; // change to this to the desired username
-        var repo = 'foundation'; // change to this to the desired repo of the specified user
-        var statsURL = 'https://api.github.com/repos/'+ user +'/'+ repo +'/stats/commit_activity';
+    $.gitGraph = function(element, options) {
+        console.log(options);
 
-        function testAjax() {
+        var commit_data = new getCommitData();
+        var repoCommits = commit_data.data;
 
+        // console.log(commit_data.data);
+
+        // var settings = {
+        //         user: options.user,
+        //         repo: options.repo,
+        //     };
+
+        function test(settings) {
+                window[settings] = {
+                    user: options.user,
+                    repo: options.repo,
+                    gitData: repoCommits
+                };
+            }
+
+        var settings = test('data');
+        console.log(settings);
+
+        function getCommitData() {
+
+            test('data'); // note that the property name is a string, not a variable
+            // console.log(data);
+
+            var user = data.user;
+            var repo = data.repo;
+            var statsURL = 'https://api.github.com/repos/'+ user +'/'+ repo +'/stats/commit_activity';
             var result = "";
+
+            console.log(statsURL);
 
             $.ajax({
                 url: statsURL,
                 async: false,
                 dataType: 'json',
-                success: function (data, day_data) {
+                success: function (data, day_data, user, repo) {
                     var g = [];
                     var f = { g : g }
                     var commits = data[51].days;
 
-                    console.log(f);
-                    console.log(commits);
                     // Uses Moment.js to put the weekdays in reverse chronological order started with today.
                     var thisWeeksDays = new Array(7);
                       thisWeeksDays[0] = moment().utc().format('ddd');
@@ -75,28 +100,19 @@
                         { "dayOfWeek": thisWeeksDays[0], "commits": commits[g[0]] }
                       ];
 
-                result = day_data;
-
-                // handleData(day_data);
+                    result = day_data;
                 }
             });
+            result = { "data": result, "user": user, "repo": repo };
+            console.log(result);
             return result;
-        } // end function testAjax
-
-        var object = new testAjax();
-        console.log(object);
-
-
-    $.gitGraph = function(element, options) {
-
-        // gitGraph default settings
-        var settings = {
-
-            user: 'sanderblue',
-            repo: 'gitGraph',
-            gitData: object,
-            update: function() {}
         }
+
+
+
+
+        test('data');
+        console.log(data);
 
         var plugin = this;
 
@@ -115,7 +131,7 @@
             return this,
                 Morris.Line({
                   element: 'test', // ID of your chart div
-                  data: plugin.settings.gitData,
+                  data: data.gitData,
                   xkey: 'dayOfWeek',
                   ykeys: ['commits'],
                   labels: ['commits'],
@@ -138,8 +154,7 @@
     }
 
     $.fn.gitGraph = function(options) {
-        console.log(options);
-
+        // console.log(options);
         // iterate through the DOM elements we are attaching the plugin to
         return this.each(function () {
 
