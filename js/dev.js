@@ -15,5 +15,5 @@ $(document).ready(function() {
         repo: "logos-in-pure-css"
         // gitData: newData
     });
-
+    // bchanx / logos-in-pure-css
 });

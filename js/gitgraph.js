@@ -25,7 +25,7 @@
         var commit_data = new getCommitData();
         var repoCommits = commit_data.data;
 
-        // console.log(commit_data.data);
+        console.log(repoCommits);
 
         // var settings = {
         //         user: options.user,
@@ -40,16 +40,24 @@
                 };
             }
 
-        var settings = test('data');
+        test('bar');
+        console.log(bar);
+
+        var settings = {
+            user: bar.user,
+            repo: bar.repo,
+            git: repoCommits
+        };
+
         console.log(settings);
 
         function getCommitData() {
 
-            test('data'); // note that the property name is a string, not a variable
+            test('bar'); // note that the property name is a string, not a variable
             // console.log(data);
 
-            var user = data.user;
-            var repo = data.repo;
+            var user = bar.user;
+            var repo = bar.repo;
             var statsURL = 'https://api.github.com/repos/'+ user +'/'+ repo +'/stats/commit_activity';
             var result = "";
 
@@ -62,7 +70,8 @@
                 success: function (data, day_data, user, repo) {
                     var g = [];
                     var f = { g : g }
-                    var commits = data[51].days;
+                    var commits = data[50].days; // will eventually need two weeks worth of data to get it all to work
+                    console.log(commits);
 
                     // Uses Moment.js to put the weekdays in reverse chronological order started with today.
                     var thisWeeksDays = new Array(7);
@@ -101,18 +110,15 @@
                       ];
 
                     result = day_data;
+                    console.log(result);
                 }
             });
             result = { "data": result, "user": user, "repo": repo };
-            console.log(result);
             return result;
         }
 
-
-
-
         test('data');
-        console.log(data);
+        // console.log(data);
 
         var plugin = this;
 
