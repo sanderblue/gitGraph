@@ -11,9 +11,9 @@ $(document).ready(function() {
     ];
 
     $( "#test" ).gitGraph({
-        user: "bchanx",
-        repo: "logos-in-pure-css"
+        user: "edx",
+        repo: "edx-platform"
         // gitData: newData
     });
-    // bchanx / logos-in-pure-css
+    // edx / edx-platform
 });

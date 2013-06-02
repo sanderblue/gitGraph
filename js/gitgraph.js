@@ -70,7 +70,16 @@
                 success: function (data, day_data, user, repo) {
                     var g = [];
                     var f = { g : g }
-                    var commits = data[50].days; // will eventually need two weeks worth of data to get it all to work
+                    var thisWeek = data[51].days; // will eventually need two weeks worth of data to get it all to work
+                    var lastWeek = data[50].days;
+                    var twoWeeks = thisWeek.concat(lastWeek);
+
+                    console.log(thisWeek);
+                    console.log(lastWeek);
+                    console.log(twoWeeks);
+
+                    var n = 0;
+                    var commits = twoWeeks.slice(n+6, n+13); // need to rework this to auto update (week index)
                     console.log(commits);
 
                     // Uses Moment.js to put the weekdays in reverse chronological order started with today.
