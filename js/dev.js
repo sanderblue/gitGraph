@@ -16,4 +16,5 @@ $(document).ready(function() {
         // gitData: newData
     });
     // edx / edx-platform
+    // bchanx / logos-in-pure-css
 });

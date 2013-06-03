@@ -59,11 +59,6 @@
             padding: "20px"
         }, options );
 
-        // Create the graph based on the settings variable.
-        // return this.css({
-        //     padding: settings.padding,
-        // });
-
         if ( methods[methodOrOptions] ) {
             return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
         } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
@@ -113,3 +108,16 @@
                 newWeekIndex[4] = moment().utc().subtract('days', 4).format('d');
                 newWeekIndex[5] = moment().utc().subtract('days', 5).format('d');
                 newWeekIndex[6] = moment().utc().subtract('days', 6).format('d');
+
+
+  $.getJSON(dataLocal, function(data) {
+    var items = [];
+
+    console.log(data);
+
+    $.each(data, function(key, val) {
+     items.push(key, val);
+    });
+
+    console.log(items);
+  });

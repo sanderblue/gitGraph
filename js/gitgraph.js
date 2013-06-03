@@ -8,29 +8,11 @@
 
 (function($) {
 
-    var test_data = [
-        { "dayOfWeek": 1, "commits": 100 },
-        { "dayOfWeek": 1, "commits": 75 },
-        { "dayOfWeek": 1, "commits": 50 },
-        { "dayOfWeek": 1, "commits": 75 },
-        { "dayOfWeek": 1, "commits": 50 },
-        { "dayOfWeek": 1, "commits": 75 },
-        { "dayOfWeek": 1, "commits": 100 }
-    ];
-
-
     $.gitGraph = function(element, options) {
         console.log(options);
 
         var commit_data = new getCommitData();
         var repoCommits = commit_data.data;
-
-        console.log(repoCommits);
-
-        // var settings = {
-        //         user: options.user,
-        //         repo: options.repo,
-        //     };
 
         function test(settings) {
                 window[settings] = {
@@ -41,7 +23,6 @@
             }
 
         test('bar');
-        console.log(bar);
 
         var settings = {
             user: bar.user,
@@ -49,37 +30,34 @@
             git: repoCommits
         };
 
-        console.log(settings);
-
         function getCommitData() {
 
             test('bar'); // note that the property name is a string, not a variable
-            // console.log(data);
 
             var user = bar.user;
             var repo = bar.repo;
             var statsURL = 'https://api.github.com/repos/'+ user +'/'+ repo +'/stats/commit_activity';
             var result = "";
 
-            console.log(statsURL);
+            var testURL = 'http://sanderblue.com/data/gitGraph/twoweeks.json';
 
             $.ajax({
-                url: statsURL,
+                url: testURL,
                 async: false,
-                dataType: 'json',
+                dataType: 'jsonp',
                 success: function (data, day_data, user, repo) {
+
+                  console.log(data);
+
                     var g = [];
                     var f = { g : g }
-                    var thisWeek = data[51].days; // will eventually need two weeks worth of data to get it all to work
-                    var lastWeek = data[50].days;
+                    var thisWeek = data[0].days.reverse(); // will eventually need two weeks worth of data to get it all to work
+                    var lastWeek = data[1].days.reverse();
                     var twoWeeks = thisWeek.concat(lastWeek);
-
-                    console.log(thisWeek);
-                    console.log(lastWeek);
-                    console.log(twoWeeks);
 
                     var n = 0;
                     var commits = twoWeeks.slice(n+6, n+13); // need to rework this to auto update (week index)
+                    console.log(twoWeeks);
                     console.log(commits);
 
                     // Uses Moment.js to put the weekdays in reverse chronological order started with today.
@@ -127,7 +105,6 @@
         }
 
         test('data');
-        // console.log(data);
 
         var plugin = this;
 
