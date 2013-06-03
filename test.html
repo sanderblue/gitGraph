@@ -31,25 +31,20 @@
     url: dataLocal,
     dataType: 'json',
     success: function (data) {
-      // console.log(data.weeks);
-
-      var g = [];
-      var f = { g : g }
 
       var thisWeeksCommits = data.weeks[0].days;
       var lastWeeksCommits = data.weeks[1].days;
       var twoWeeksCommits = lastWeeksCommits.concat(thisWeeksCommits);
       var dayIndex = new Date().getDay();
-      var dayIndex = 3;
 
       var thisWeeksDays = new Array(7);
           thisWeeksDays[0] = moment().utc().format('ddd');
-          thisWeeksDays[1] = moment().utc().add('days', 1).format('ddd');
-          thisWeeksDays[2] = moment().utc().add('days', 2).format('ddd');
-          thisWeeksDays[3] = moment().utc().add('days', 3).format('ddd');
-          thisWeeksDays[4] = moment().utc().add('days', 4).format('ddd');
-          thisWeeksDays[5] = moment().utc().add('days', 5).format('ddd');
-          thisWeeksDays[6] = moment().utc().add('days', 6).format('ddd');
+          thisWeeksDays[1] = moment().utc().add('days', 6).format('ddd');
+          thisWeeksDays[2] = moment().utc().add('days', 5).format('ddd');
+          thisWeeksDays[3] = moment().utc().add('days', 4).format('ddd');
+          thisWeeksDays[4] = moment().utc().add('days', 3).format('ddd');
+          thisWeeksDays[5] = moment().utc().add('days', 2).format('ddd');
+          thisWeeksDays[6] = moment().utc().add('days', 1).format('ddd');
 
       var thisWeekIndex = new Array(7);
           thisWeekIndex[0] = moment().utc().format('d');
@@ -69,23 +64,37 @@
           lastWeekIndex[5] = moment().utc().add('days', 5).format('d');
           lastWeekIndex[6] = moment().utc().add('days', 6).format('d');
 
-
-      var newArray = [];
-
       var twoWeeksIndices = lastWeekIndex.concat(thisWeekIndex);
-      var commitsIndices = twoWeeksIndices.slice(dayIndex, dayIndex+7); // grab the previous 7 days from array
+      var commitsIndices = twoWeeksIndices.slice(dayIndex, dayIndex+7);
       var sevenDaysCommits = twoWeeksCommits.slice(dayIndex+1, dayIndex+8);
 
-      $.each(commitsIndices, function (k, v) {
+
+      var g = [];
+      var commitsObj = { g : g }
+
+      $.each(sevenDaysCommits, function (k, v) {
         g.push(v); // push new values to array g
       });
 
-      console.log(f);
+      console.log(commitsObj);
       // console.log(lastWeekIndex);
       console.log(twoWeeksCommits);
       console.log(twoWeeksIndices);
       console.log(commitsIndices);
       console.log(sevenDaysCommits);
+
+      var day_data = [
+        { "dayOfWeek": thisWeeksDays[0], "commits": commitsObj.g[6] },
+        { "dayOfWeek": thisWeeksDays[1], "commits": commitsObj.g[5] },
+        { "dayOfWeek": thisWeeksDays[2], "commits": commitsObj.g[4] },
+        { "dayOfWeek": thisWeeksDays[3], "commits": commitsObj.g[3] },
+        { "dayOfWeek": thisWeeksDays[4], "commits": commitsObj.g[2] },
+        { "dayOfWeek": thisWeeksDays[5], "commits": commitsObj.g[1] },
+        { "dayOfWeek": thisWeeksDays[6], "commits": commitsObj.g[0] }
+      ];
+
+      console.log(day_data);
+
     }
   });
 </script>
