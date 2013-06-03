@@ -44,7 +44,6 @@
                 async: false,
                 dataType: 'json',
                 success: function (data, day_data, user, repo) {
-                  console.log(data);
 
                   var thisWeeksCommits = data[51].days;
                   var lastWeeksCommits = data[50].days;
@@ -90,20 +89,20 @@
                     g.push(v); // push new values to array g
                   });
 
-                  console.log(thisWeeksCommits);
+                  // console.log(thisWeeksCommits);
                   console.log(twoWeeksCommits);
-                  console.log(twoWeeksIndices);
-                  console.log(commitsIndices);
-                  console.log(sevenDaysCommits);
+                  // console.log(twoWeeksIndices);
+                  // console.log(commitsIndices);
+                  // console.log(sevenDaysCommits);
 
                   var day_data = [
-                    { "dayOfWeek": thisWeeksDays[0], "commits": commitsObj.g[6] },
-                    { "dayOfWeek": thisWeeksDays[1], "commits": commitsObj.g[5] },
-                    { "dayOfWeek": thisWeeksDays[2], "commits": commitsObj.g[4] },
-                    { "dayOfWeek": thisWeeksDays[3], "commits": commitsObj.g[3] },
-                    { "dayOfWeek": thisWeeksDays[4], "commits": commitsObj.g[2] },
+                    { "dayOfWeek": thisWeeksDays[6], "commits": commitsObj.g[0] },
                     { "dayOfWeek": thisWeeksDays[5], "commits": commitsObj.g[1] },
-                    { "dayOfWeek": thisWeeksDays[6], "commits": commitsObj.g[0] }
+                    { "dayOfWeek": thisWeeksDays[4], "commits": commitsObj.g[2] },
+                    { "dayOfWeek": thisWeeksDays[3], "commits": commitsObj.g[3] },
+                    { "dayOfWeek": thisWeeksDays[2], "commits": commitsObj.g[4] },
+                    { "dayOfWeek": thisWeeksDays[1], "commits": commitsObj.g[5] },
+                    { "dayOfWeek": thisWeeksDays[0], "commits": commitsObj.g[6] }
                   ];
 
                   console.log(day_data);
