@@ -4,7 +4,9 @@ This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesm
 
 Check out the [GitHub Developer API Documentation](http://developer.github.com/) for help creating your own line charts.
 
-Status: Working, but also a work in progress.
+Status: Working.
+
+On the agenda: More options, better error handling, better test-driven development.
 
 Dependencies
 ============
@@ -15,11 +17,22 @@ Dependencies
 
 Usage
 =====
-Simply set the variables (they will be obvious) in the js/app.js file to a desired username and repo.
+Requirements: A div ID, a GitHub username, a repository from that user, and a specified height for the graph. The below example has inline style for demonstration purposes.
+
+``` html
+<div id="myGitGraphDivID" style="height: 300px; width:660px;"></div>
+```
+
+``` javascript
+$('myGitGraphDivID').gitGraph({
+  divID: 'myGitGraphDivID', // must be an ID, not a class
+  user: 'github',
+  repo: 'github-services'
+});
+```
 
 Also note this from GitHub's API v3 Documentation:
-"Rate Limiting
-
+"Rate Limiting:
 We limit requests to 60 per hour for unauthenticated requests. For requests using Basic Authentication or OAuth, we limit requests to 5,000 per hour."
 
 

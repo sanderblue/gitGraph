@@ -8,11 +8,10 @@
     <link href="css/morris.css" rel="stylesheet">
 
     <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script type="text/javascript" src="js/vendor/raphael.min.js"></script>
     <script type="text/javascript" src="js/vendor/morris.min.js"></script>
     <script type="text/javascript" src="js/vendor/moment.min.js"></script>
     <script type="text/javascript" src="js/gitGraph.js"></script>
-    <script type="text/javascript" src="js/dev.js"></script>
 
     <!--[if IE]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,6 +21,16 @@
 <body>
 
 <div id="test" style="height: 300px; width:660px;">Testing</div>
+
+<script type="text/javascript">
+  $(function() {
+      $( "#test" ).gitGraph({
+          divID: "test",
+          user: "edx",
+          repo: "edx-platform"
+      });
+  });
+</script>
 
 </body>
 </html>
