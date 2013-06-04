@@ -2,8 +2,6 @@ gitGraph
 ========
 This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), [Moment.js](http://momentjs.com/) and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with a specified repo's commits over the last 7 days. GitHub's individual repo line charts only show a static week (Sunday to Saturday), but gitGraph displays data based on the current day of the week.
 
-Check out the [GitHub Developer API Documentation](http://developer.github.com/).
-
 Status: Working.
 
 On the agenda: More options, larger data sets, better error handling, better test-driven development.
@@ -25,9 +23,9 @@ Requirements: A div ID, a GitHub username, a repository from that user, and a sp
 
 ``` javascript
 $('myGitGraphDivID').gitGraph({
-  divID: 'myGitGraphDivID', // must be an ID, not a class
-  user: 'github',
-  repo: 'github-services'
+  divID: "myGitGraphDivID", // must be an ID, not a class
+  user: "github",
+  repo: "github-services"
 });
 ```
 
