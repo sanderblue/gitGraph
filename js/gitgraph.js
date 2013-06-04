@@ -1,9 +1,10 @@
 /*
- * gitGraph
+ * gitGraph.js
  *
  * Author: Sander Blue - http://www.sanderblue.com
  * Copyright (c) 2013, Sander Blue All rights reserved.
  *
+ * Thanks to Morris.js and Moment.js
  */
 
 (function($) {
@@ -33,8 +34,7 @@
         };
 
         function getCommitData() {
-
-            git('bar'); // note that the property name is a string, not a variable
+            git('bar');
 
             var user = bar.user;
             var repo = bar.repo;
@@ -99,7 +99,7 @@
                     var commitsObj = { g : g }
 
                     $.each(sevenDaysCommits, function (k, v) {
-                      g.push(v); // push new values to array g
+                      g.push(v);
                     });
 
                     var day_data = [
@@ -137,21 +137,21 @@
             // Create the Morris.js graph based on the user provided data.
             return this,
                 Morris.Line({
-                  element: data.divID, // soon to become an option for the user to specify
-                  data: data.gitData,
-                  xkey: 'dayOfWeek',
-                  ykeys: ['commits'],
-                  labels: ['commits'],
-                  lineWidth: 1.75,
-                  lineColors:['#479201'],
-                  pointSize: 2.75,
-                  pointWidths: [1],
-                  pointStrokeColors: ['#ffffff'],
-                  smooth: true,
-                  continuousLine: true,
-                  hideHover: true,
-                  gridTextSize: 10,
-                  parseTime: false // Turns off auto time parsing of the x-axis values
+                    element: data.divID, // soon to become an option for the user to specify
+                    data: data.gitData,
+                    xkey: 'dayOfWeek',
+                    ykeys: ['commits'],
+                    labels: ['commits'],
+                    lineWidth: 1.75,
+                    lineColors:['#479201'],
+                    pointSize: 2.75,
+                    pointWidths: [1],
+                    pointStrokeColors: ['#ffffff'],
+                    smooth: true,
+                    continuousLine: true,
+                    hideHover: true,
+                    gridTextSize: 10,
+                    parseTime: false // Turns off auto time parsing of the x-axis values
                 });
 
         }
@@ -161,16 +161,12 @@
     }
 
     $.fn.gitGraph = function(options) {
-        // console.log(options);
-        // iterate through the DOM elements we are attaching the plugin to
         return this.each(function () {
-
-            // if plugin has not already been attached to the element
             if (undefined == $(this).data('gitGraph')) {
 
                 var plugin = new $.gitGraph(this, options);
 
-                $(this).data('gitGraph', plugin); // storing the object for accessibility
+                $(this).data('gitGraph', plugin);
             }
 
         });
