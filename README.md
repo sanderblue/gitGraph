@@ -31,6 +31,7 @@ Write your markup
 <div id="myGitGraphDivID" style="height: 300px; width:660px;"></div>
 ```
 
+Initialize the plugin with a div ID, GitHub username and repo
 ``` javascript
 $('myGitGraphDivID').gitGraph({
   divID: "myGitGraphDivID", // must be an ID, not a class
