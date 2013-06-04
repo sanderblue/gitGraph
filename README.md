@@ -38,7 +38,7 @@ Initialize the plugin with the following parameters: GitHub username, and a repo
 ``` javascript
 $('#gitGraph').gitGraph({
   user: "github", // any GitHub username
-  repo: "github-services" // any public repository of the specified   username's account
+  repo: "github-services" // any public repository of the specified username's account
 });
 ```
 
