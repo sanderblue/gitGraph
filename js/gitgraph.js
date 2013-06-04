@@ -34,7 +34,7 @@
 
         function git(settings) {
             window[settings] = {
-                    divID: 'test',
+                    divID: 'gitGraph',
                     user: options.user,
                     repo: options.repo,
                     gitData: repoCommits
@@ -44,7 +44,7 @@
         git('bar');
 
         var settings = {
-            divID: 'test',
+            divID: 'gitGraph',
             user: bar.user,
             repo: bar.repo,
             git: repoCommits
