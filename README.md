@@ -15,7 +15,7 @@ Dependencies
 
 Usage
 =====
-Requirements: A div ID, a GitHub username, a repository from that user, and a specified height for the graph. The below example has inline style for demonstration purposes.
+Requirements: The "#gitGraph" div ID, a GitHub username, a repository from that user, and a specified height for the graph. The below example has inline style for demonstration purposes.
 
 
 Include dependencies and GitGraph.js
@@ -28,16 +28,15 @@ Include dependencies and GitGraph.js
 ```
 
 
-Write your markup
+Write your markup including the div's ID as "gitGraph"
 ``` html
-<div id="myGitGraphDivID" style="height: 300px; width:660px;"></div>
+<div id="gitGraph" style="height: 300px; width:660px;"></div>
 ```
 
 
-Initialize the plugin with a div ID, GitHub username and repo
+Initialize the plugin with the following parameters: GitHub username, and a repository from that user
 ``` javascript
-$('myGitGraphDivID').gitGraph({
-  divID: "myGitGraphDivID", // must be an ID, not a class
+$('#gitGraph').gitGraph({
   user: "github",
   repo: "github-services"
 });
