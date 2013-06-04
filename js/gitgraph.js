@@ -14,17 +14,19 @@
         var commit_data = new getCommitData();
         var repoCommits = commit_data.data;
 
-        function test(settings) {
-                window[settings] = {
+        function git(settings) {
+            window[settings] = {
+                    divID: 'test',
                     user: options.user,
                     repo: options.repo,
                     gitData: repoCommits
                 };
             }
 
-        test('bar');
+        git('bar');
 
         var settings = {
+            divID: 'test',
             user: bar.user,
             repo: bar.repo,
             git: repoCommits
@@ -32,7 +34,7 @@
 
         function getCommitData() {
 
-            test('bar'); // note that the property name is a string, not a variable
+            git('bar'); // note that the property name is a string, not a variable
 
             var user = bar.user;
             var repo = bar.repo;
@@ -43,79 +45,81 @@
                 url: statsURL,
                 async: false,
                 dataType: 'json',
+                error: function(httpRequest, textStatus, errorThrown) {
+                  alert("Please make sure your username and repository information is correct. Status: " + textStatus + "\n\nError: " + errorThrown);
+                },
                 success: function (data, day_data, user, repo) {
 
-                  var thisWeeksCommits = data[51].days;
-                  var lastWeeksCommits = data[50].days;
-                  var twoWeeksCommits = lastWeeksCommits.concat(thisWeeksCommits);
-                  var dayIndex = new Date().getDay();
+                    var thisWeeksCommits = data[51].days;
+                    var lastWeeksCommits = data[50].days;
+                    var twoWeeksCommits = lastWeeksCommits.concat(thisWeeksCommits);
+                    var dayIndex = new Date().getDay();
 
-                  var thisWeeksDays = new Array(7);
-                      thisWeeksDays[0] = moment().utc().format('ddd');
-                      thisWeeksDays[1] = moment().utc().add('days', 6).format('ddd');
-                      thisWeeksDays[2] = moment().utc().add('days', 5).format('ddd');
-                      thisWeeksDays[3] = moment().utc().add('days', 4).format('ddd');
-                      thisWeeksDays[4] = moment().utc().add('days', 3).format('ddd');
-                      thisWeeksDays[5] = moment().utc().add('days', 2).format('ddd');
-                      thisWeeksDays[6] = moment().utc().add('days', 1).format('ddd');
+                    // Organize the x-axis days depending the day of the week
+                    var thisWeeksDays = new Array(7);
+                        thisWeeksDays[0] = moment().utc().format('ddd');
+                        thisWeeksDays[1] = moment().utc().add('days', 6).format('ddd');
+                        thisWeeksDays[2] = moment().utc().add('days', 5).format('ddd');
+                        thisWeeksDays[3] = moment().utc().add('days', 4).format('ddd');
+                        thisWeeksDays[4] = moment().utc().add('days', 3).format('ddd');
+                        thisWeeksDays[5] = moment().utc().add('days', 2).format('ddd');
+                        thisWeeksDays[6] = moment().utc().add('days', 1).format('ddd');
 
-                  var thisWeekIndex = new Array(7);
-                      thisWeekIndex[0] = moment().utc().format('d');
-                      thisWeekIndex[1] = moment().utc().add('days', 1).format('d');
-                      thisWeekIndex[2] = moment().utc().add('days', 2).format('d');
-                      thisWeekIndex[3] = moment().utc().add('days', 3).format('d');
-                      thisWeekIndex[4] = moment().utc().add('days', 4).format('d');
-                      thisWeekIndex[5] = moment().utc().add('days', 5).format('d');
-                      thisWeekIndex[6] = moment().utc().add('days', 6).format('d');
+                    // Organize this week's indices using Moment.js
+                    var thisWeekIndex = new Array(7);
+                        thisWeekIndex[0] = moment().utc().format('d');
+                        thisWeekIndex[1] = moment().utc().add('days', 1).format('d');
+                        thisWeekIndex[2] = moment().utc().add('days', 2).format('d');
+                        thisWeekIndex[3] = moment().utc().add('days', 3).format('d');
+                        thisWeekIndex[4] = moment().utc().add('days', 4).format('d');
+                        thisWeekIndex[5] = moment().utc().add('days', 5).format('d');
+                        thisWeekIndex[6] = moment().utc().add('days', 6).format('d');
 
-                  var lastWeekIndex = new Array(7);
-                      lastWeekIndex[0] = moment().utc().format('d');
-                      lastWeekIndex[1] = moment().utc().add('days', 1).format('d');
-                      lastWeekIndex[2] = moment().utc().add('days', 2).format('d');
-                      lastWeekIndex[3] = moment().utc().add('days', 3).format('d');
-                      lastWeekIndex[4] = moment().utc().add('days', 4).format('d');
-                      lastWeekIndex[5] = moment().utc().add('days', 5).format('d');
-                      lastWeekIndex[6] = moment().utc().add('days', 6).format('d');
+                    // Organize last week's indices using Moment.js
+                    var lastWeekIndex = new Array(7);
+                        lastWeekIndex[0] = moment().utc().format('d');
+                        lastWeekIndex[1] = moment().utc().add('days', 1).format('d');
+                        lastWeekIndex[2] = moment().utc().add('days', 2).format('d');
+                        lastWeekIndex[3] = moment().utc().add('days', 3).format('d');
+                        lastWeekIndex[4] = moment().utc().add('days', 4).format('d');
+                        lastWeekIndex[5] = moment().utc().add('days', 5).format('d');
+                        lastWeekIndex[6] = moment().utc().add('days', 6).format('d');
 
-                  var twoWeeksIndices = lastWeekIndex.concat(thisWeekIndex);
-                  var commitsIndices = twoWeeksIndices.slice(dayIndex, dayIndex+7);
-                  var sevenDaysCommits = twoWeeksCommits.slice(dayIndex+1, dayIndex+8);
+                    var twoWeeksIndices = lastWeekIndex.concat(thisWeekIndex);
 
+                    // Grab the correct array/set of indices from the last
+                    // two weeks of data depending on the day of the week
+                    var commitsIndices = twoWeeksIndices.slice(dayIndex, dayIndex+7);
 
-                  var g = [];
-                  var commitsObj = { g : g }
+                    // Grab the correct array/set of data from the last
+                    // two weeks of data depending on the day of the week
+                    var sevenDaysCommits = twoWeeksCommits.slice(dayIndex+1, dayIndex+8);
 
-                  $.each(sevenDaysCommits, function (k, v) {
-                    g.push(v); // push new values to array g
-                  });
+                    var g = [];
+                    var commitsObj = { g : g }
 
-                  // console.log(thisWeeksCommits);
-                  console.log(twoWeeksCommits);
-                  // console.log(twoWeeksIndices);
-                  // console.log(commitsIndices);
-                  // console.log(sevenDaysCommits);
+                    $.each(sevenDaysCommits, function (k, v) {
+                      g.push(v); // push new values to array g
+                    });
 
-                  var day_data = [
-                    { "dayOfWeek": thisWeeksDays[6], "commits": commitsObj.g[0] },
-                    { "dayOfWeek": thisWeeksDays[5], "commits": commitsObj.g[1] },
-                    { "dayOfWeek": thisWeeksDays[4], "commits": commitsObj.g[2] },
-                    { "dayOfWeek": thisWeeksDays[3], "commits": commitsObj.g[3] },
-                    { "dayOfWeek": thisWeeksDays[2], "commits": commitsObj.g[4] },
-                    { "dayOfWeek": thisWeeksDays[1], "commits": commitsObj.g[5] },
-                    { "dayOfWeek": thisWeeksDays[0], "commits": commitsObj.g[6] }
-                  ];
+                    var day_data = [
+                      { "dayOfWeek": thisWeeksDays[6], "commits": commitsObj.g[0] },
+                      { "dayOfWeek": thisWeeksDays[5], "commits": commitsObj.g[1] },
+                      { "dayOfWeek": thisWeeksDays[4], "commits": commitsObj.g[2] },
+                      { "dayOfWeek": thisWeeksDays[3], "commits": commitsObj.g[3] },
+                      { "dayOfWeek": thisWeeksDays[2], "commits": commitsObj.g[4] },
+                      { "dayOfWeek": thisWeeksDays[1], "commits": commitsObj.g[5] },
+                      { "dayOfWeek": thisWeeksDays[0], "commits": commitsObj.g[6] }
+                    ];
 
-                  console.log(day_data);
-
-                  result = day_data;
-                  console.log(result);
+                    result = day_data;
                 }
             });
-            result = { "data": result, "user": user, "repo": repo };
+            result = { "data": result, "user": user, "repo": repo }; // for double checking
             return result;
         }
 
-        test('data');
+        git('data');
 
         var plugin = this;
 
@@ -127,13 +131,13 @@
         // the "constructor"
         plugin.init = function() {
 
-            // allows user to override gitGraph defaults
+            // Allow user to override gitGraph defaults
             plugin.settings = $.extend({}, settings, options);
 
-            // Create the graph based on the user provided data.
+            // Create the Morris.js graph based on the user provided data.
             return this,
                 Morris.Line({
-                  element: 'test', // ID of your chart div
+                  element: data.divID, // soon to become an option for the user to specify
                   data: data.gitData,
                   xkey: 'dayOfWeek',
                   ykeys: ['commits'],
@@ -152,7 +156,7 @@
 
         }
 
-        plugin.init(); // initialize the plguin and call the "constructor" method
+        plugin.init();
 
     }
 
