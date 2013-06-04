@@ -37,8 +37,8 @@ Write your markup including the div's ID as "gitGraph"
 Initialize the plugin with the following parameters: GitHub username, and a repository from that user
 ``` javascript
 $('#gitGraph').gitGraph({
-  user: "github",
-  repo: "github-services"
+  user: "github", // any GitHub username
+  repo: "github-services" // any public repository of the specified username's account
 });
 ```
 
