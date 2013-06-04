@@ -4,7 +4,7 @@ This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesm
 
 Status: Working.
 
-On the agenda: More options, larger data sets, better error handling, better test-driven development.
+On the agenda: Demo site, more options, larger data sets, better error handling, better test-driven development.
 
 Dependencies
 ============
