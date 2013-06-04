@@ -17,6 +17,7 @@ Usage
 =====
 Requirements: A div ID, a GitHub username, a repository from that user, and a specified height for the graph. The below example has inline style for demonstration purposes.
 
+
 Include dependencies and GitGraph.js
 ``` html
 <script type="text/javascript" src="jquery.min.js"></script>
@@ -26,10 +27,12 @@ Include dependencies and GitGraph.js
 <script type="text/javascript" src="gitGraph.js"></script>
 ```
 
+
 Write your markup
 ``` html
 <div id="myGitGraphDivID" style="height: 300px; width:660px;"></div>
 ```
+
 
 Initialize the plugin with a div ID, GitHub username and repo
 ``` javascript
