@@ -1,12 +1,12 @@
 gitGraph
 ========
-This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), [Moment.js](http://momentjs.com/) and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with a specified repo's commits over the last 7 days.
+This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), [Moment.js](http://momentjs.com/) and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with a specified repo's commits over the last 7 days. GitHub's individual repo line charts only show a static week (Sunday to Saturday), but gitGraph displays data based on the current day of the week.
 
-Check out the [GitHub Developer API Documentation](http://developer.github.com/) for help creating your own line charts.
+Check out the [GitHub Developer API Documentation](http://developer.github.com/).
 
 Status: Working.
 
-On the agenda: More options, better error handling, better test-driven development.
+On the agenda: More options, larger data sets, better error handling, better test-driven development.
 
 Dependencies
 ============
