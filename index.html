@@ -20,11 +20,12 @@
   </head>
 <body>
 
-<div id="gitGraph" style="height: 300px; width:660px;"></div>
+<div id="myGitGraph" style="height: 300px; width:660px;"></div>
 
 <script type="text/javascript">
   $(function() {
-      $( "#gitGraph" ).gitGraph({
+      $( "#myGitGraph" ).gitGraph({
+          html: "myGitGraph",
           user: "edx",
           repo: "edx-platform"
       });

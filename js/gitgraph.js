@@ -34,7 +34,7 @@
 
         function git(settings) {
             window[settings] = {
-                    divID: 'gitGraph',
+                    html: options.html,
                     user: options.user,
                     repo: options.repo,
                     gitData: repoCommits
@@ -44,11 +44,12 @@
         git('bar');
 
         var settings = {
-            divID: 'gitGraph',
+            html: bar.html,
             user: bar.user,
             repo: bar.repo,
             git: repoCommits
         };
+        // console.log(settings);
 
         function getCommitData() {
             git('bar');
@@ -151,10 +152,13 @@
             // Allow user to override gitGraph defaults
             plugin.settings = $.extend({}, settings, options);
 
+            console.log(options.html);
+            console.log(settings.html);
+
             // Create the Morris.js graph based on the user provided data.
             return this,
                 Morris.Line({
-                    element: data.divID, // soon to become an option for the user to specify
+                    element: settings.html, // soon to become an option for the user to specify
                     data: data.gitData,
                     xkey: 'dayOfWeek',
                     ykeys: ['commits'],
