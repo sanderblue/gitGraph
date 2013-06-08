@@ -1,10 +1,18 @@
-gitGraph
+GitGraph
 ========
+<<<<<<< HEAD
 This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), [Moment.js](http://momentjs.com/) and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with a specified repo's commits over the last 7 days. GitHub's individual repo line charts only show a static week (Sunday to Saturday), but gitGraph displays data based on the current day of the week.
 
 Status: Working.
 
 On the agenda: More options, larger data sets, better error handling, better test-driven development.
+=======
+This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), [Moment.js](http://momentjs.com/) and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with a specified repo's commits over the last 7 days. GitHub's individual repo line charts only show a static week (Sunday to Saturday), but gitGraph displays data based on the current day of the week. All data is displayed based on UTC time.
+
+Status: Working.
+
+On the agenda: Demo site, more options, larger data sets, better error handling, better test-driven development.
+>>>>>>> cccfbbb3db5440879bf8ccc6d80f1500973f85f2
 
 Dependencies
 ============
@@ -15,19 +23,33 @@ Dependencies
 
 Usage
 =====
-Requirements: A div ID, a GitHub username, a repository from that user, and a specified height for the graph. The below example has inline style for demonstration purposes.
+Requirements: The "#gitGraph" div ID, a GitHub username, a repository from that user, and a specified height for the graph. The below example has inline style for demonstration purposes.
 
+
+Include dependencies and GitGraph.js
 ``` html
-<div id="myGitGraphDivID" style="height: 300px; width:660px;"></div>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="raphael.min.js"></script>
+<script type="text/javascript" src="morris.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="gitGraph.js"></script>
 ```
 
+
+Write your markup including the div's ID as "gitGraph"
+``` html
+<div id="gitGraph" style="height: 300px; width:660px;"></div>
+```
+
+
+Initialize the plugin with the following parameters: GitHub username, and a repository from that user
 ``` javascript
-$('myGitGraphDivID').gitGraph({
-  divID: "myGitGraphDivID", // must be an ID, not a class
-  user: "github",
-  repo: "github-services"
+$('#gitGraph').gitGraph({
+  user: "github", // any GitHub username
+  repo: "github-services" // any public repository of the specified username's account
 });
 ```
+
 
 Also note this from GitHub's API v3 Documentation:
 "Rate Limiting:
