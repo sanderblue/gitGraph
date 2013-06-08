@@ -133,6 +133,7 @@
                 }
             });
             result = { "data": result, "user": user, "repo": repo }; // for double checking
+                console.log(result);
             return result;
         }
 
