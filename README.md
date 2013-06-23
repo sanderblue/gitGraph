@@ -15,7 +15,7 @@ Dependencies
 
 Usage
 =====
-First choose the user for which you would like to see repo activity. Then choose a repo of that user to display their recent activity. You will pass in the username and repo as options of th plugin. The below example has inline style for demonstration purposes.
+First choose the user for which you would like to see repo activity. Then choose a repo of that user to display their recent activity. You will pass in the username and repo as options of the plugin. You must also specify a height for your html element. The below example has inline style for demonstration purposes.
 
 Update: You can now give your div any id you wish as long as you pass it in as an option, ``` { html: "someID" } ```
 
@@ -48,7 +48,7 @@ $('#someID').gitGraph({
 
 Also note this from GitHub's API v3 Documentation:
 "Rate Limiting:
-We limit requests to 60 per hour for unauthenticated requests. For requests using Basic Authentication or OAuth, we limit requests to 5,000 per hour."
+We [GitHub] limit requests to 60 per hour for unauthenticated requests. For requests using Basic Authentication or OAuth, we limit requests to 5,000 per hour."
 
 
 On the agenda:
