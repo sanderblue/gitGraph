@@ -17,7 +17,7 @@ Usage
 =====
 First choose the user for which you would like to see repo activity. Then choose a repo of that user to display their recent activity. You will pass in the username and repo as options of th plugin. The below example has inline style for demonstration purposes.
 
-Update: You can now give your div any id you wish as long as you pass it in as an option, ``` javascript { html: "someID" } ```
+Update: You can now give your div any id you wish as long as you pass it in as an option, ``` { html: "someID" } ```
 
 
 Include dependencies and GitGraph.js
