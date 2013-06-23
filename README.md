@@ -54,6 +54,7 @@ We [GitHub] limit requests to 60 per hour for unauthenticated requests. For requ
 On the agenda:
 ==============
 Demo site, more options, larger data sets, better error handling, better test-driven development.
+You can see the plugin in action here at [SanderBlue.com](http://www.sanderblue.com/) in the work section.
 
 
 License
