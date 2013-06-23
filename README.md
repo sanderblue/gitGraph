@@ -1,6 +1,5 @@
 GitGraph
 ========
-<<<<<<< HEAD
 This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesmith.github.com/morris.js/), [Moment.js](http://momentjs.com/) and GitHub's Developer API. It uses GitHub's API to update a Morris.js line chart with a specified repo's commits over the last 7 days. GitHub's individual repo line charts only show a static week (Sunday to Saturday), but gitGraph displays data based on the current day of the week.
 
 Status: Working.
@@ -12,18 +11,20 @@ This is a small project I built with JavaScript, jQuery, [Morris.js](http://oesm
 Status: Working.
 
 On the agenda: Demo site, more options, larger data sets, better error handling, better test-driven development.
->>>>>>> cccfbbb3db5440879bf8ccc6d80f1500973f85f2
+
 
 Dependencies
 ============
 [jQuery](http://jquery.com/),
 [Raphael.js](http://raphaeljs.com/),
-[Morris.js](http://oesmith.github.com/morris.js/)
+[Morris.js](http://oesmith.github.com/morris.js/),
 [Moment.js](http://momentjs.com/)
 
 Usage
 =====
-Requirements: The "#gitGraph" div ID, a GitHub username, a repository from that user, and a specified height for the graph. The below example has inline style for demonstration purposes.
+First choose the user for which you would like to see repo activity. Then choose a repo of that user to display their recent activity. You will pass in the username and repo as options of th plugin. The below example has inline style for demonstration purposes.
+
+Update: You can now give your div any id you wish as long as you pass it in as an option, ``` javascript { html: "someID" } ```
 
 
 Include dependencies and GitGraph.js
@@ -36,15 +37,16 @@ Include dependencies and GitGraph.js
 ```
 
 
-Write your markup including the div's ID as "gitGraph"
+Write your markup including the div's ID as "someID"
 ``` html
-<div id="gitGraph" style="height: 300px; width:660px;"></div>
+<div id="someID" style="height: 300px; width:660px;"></div>
 ```
 
 
 Initialize the plugin with the following parameters: GitHub username, and a repository from that user
 ``` javascript
-$('#gitGraph').gitGraph({
+$('#someID').gitGraph({
+  html: "someID", // you can now pass in any div ID as an option
   user: "github", // any GitHub username
   repo: "github-services" // any public repository of the specified username's account
 });
