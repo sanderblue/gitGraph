@@ -10,50 +10,8 @@
 
     <link href="css/morris.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
-
-      /* Custom container */
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 700px;
-      }
-      .container-narrow > hr {
-        margin: 10px 0;
-        width: 100%;
-      }
-
-      /* Main marketing message and sign up button */
-      .jumbotron {
-        margin: 30px 0;
-        text-align: center;
-      }
-      .jumbotron h1 {
-        font-size: 52px;
-        line-height: 1;
-      }
-      .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-      }
-
-      .lead {
-        font-size: 16px;
-      }
-
-      /* Supporting marketing content */
-      .marketing {
-        margin: 60px 0;
-      }
-      .marketing p + h4 {
-        margin-top: 28px;
-      }
-    </style>
     <link href="css/bootstrap.responsive.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -83,7 +41,14 @@
         <!-- GitGraph Chart -->
         <div id="myGitGraph" style="height: 300px; width:660px;"></div>
 
-        <select id="users"></select>
+        <select id="users" class="github-users-dropdown">
+          <option value="">Choose a GitHub user</option>
+          <option value="sanderblue">sanderblue</option>
+          <option value="sstjohn">sstjohn</option> <!-- corewar-evolution -->
+          <option value="edx">edx</option>
+        </select>
+
+        <select id="user-repo-options" class="github-repos-dropdown"></select>
 
         <a class="btn btn-large btn-success" href="http://twitter.github.io/bootstrap/examples/marketing-narrow.html#">Button</a>
       </div>
@@ -123,21 +88,12 @@
     </div> <!-- /container -->
 
   <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
-  <script type="text/javascript" src="js/vendor/knockout.js"></script>
+  <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/vendor/raphael.min.js"></script>
   <script type="text/javascript" src="js/vendor/morris.min.js"></script>
   <script type="text/javascript" src="js/vendor/moment.min.js"></script>
   <script type="text/javascript" src="js/gitGraph.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript">
-    $(function() {
-        $( "#myGitGraph" ).gitGraph({
-            html: "myGitGraph",
-            user: "edx",
-            repo: "edx-platform"
-        });
-    });
-  </script>
 
 
 </body></html>

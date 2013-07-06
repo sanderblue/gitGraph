@@ -1,42 +1,85 @@
 $(function($){
 
-    var GitGraph = function () {};
-
     var apiURL = 'https://api.github.com';
 
-    GitGraph.prototype.getGitHubData = function(a) {
-        console.log("Main js: ", a);
+    $('.github-users-dropdown').on('change', function () {
 
-        var allUsersURL = 'https://api.github.com/users';
+        var changed_user_value = $(this).val();
 
-        return $.getJSON(allUsersURL, function (data) {
-            console.log("prototype data: ", data);
-        });
-    };
+        console.log(changed_user_value);
 
-    var getGitHubData = function () {
-        // var userSearchURL = apiURL + '/legacy/user/search/sanderblue';
-        var userSearchURL = apiURL + '/users';
+        var userReposURL = 'https://api.github.com/users/'+ changed_user_value +'/repos'
 
-        return $.ajax({
-                url: userSearchURL,
+        var getUserRepos = function () {
+            return $.ajax({
+                url: userReposURL,
                 type: 'GET',
                 contentType: 'json',
                 dataType: 'json'
             });
-    };
+        };
 
-    // var userRepoURL = apiURL + 'repos/'+ user +'/'+ repo +'/stats/commit_activity';
+        $.when(getUserRepos()).done(function (data) {
+            console.log("Promise done: ", data);
 
-    $.when(getGitHubData()).done(function (data) {
-        console.log("Promise done: ", data);
+            var optionsDiv = $('#user-repo-options');
 
-        var optionsDiv = $('#users');
+            $(optionsDiv).children().remove();
 
-        $.each(data, function () {
-            var h = $('<option>').val(this.login).text(this.login);
+            $.each(data, function () {
+                var h = $('<option>').val(this.name).text(this.name);
 
-            $(h).appendTo(optionsDiv);
+                $(h).appendTo(optionsDiv);
+            });
+        });
+
+        $('.github-repos-dropdown').on('change', function() {
+
+            var existingGraph     = $('body').find('#myGitGraph').replaceWith('<div id="myGitGraph" style="height: 300px; width:660px;">');
+            var change_repo_value = $(this).val();
+
+            console.log(change_repo_value);
+            // var newGraph = new changedGitGraph();
+
+            // $(existingGraph).replaceWith(newGraph);
+
+            $( "#myGitGraph" ).gitGraph({
+                html: "myGitGraph",
+                user: changed_user_value,
+                repo: change_repo_value
+            });
+
         });
     });
+
+    // var user = changed_user_value;
+
+
+    // + repo +'/stats/commit_activity';
+
+    // var getGitHubData = function () {
+    //     // var userSearchURL = apiURL + '/legacy/user/search/sanderblue';
+    //     var userSearchURL = apiURL + '/users/1';
+
+    //     return $.ajax({
+    //             url: userSearchURL,
+    //             type: 'GET',
+    //             contentType: 'json',
+    //             dataType: 'json'
+    //         });
+    // };
+
+    // // var userRepoURL = apiURL + 'repos/'+ user +'/'+ repo +'/stats/commit_activity';
+
+    // $.when(getGitHubData()).done(function (data) {
+    //     console.log("Promise done: ", data);
+
+    //     var optionsDiv = $('#users');
+
+    //     $.each(data, function () {
+    //         var h = $('<option>').val(this.login).text(this.login);
+
+    //         $(h).appendTo(optionsDiv);
+    //     });
+    // });
 });

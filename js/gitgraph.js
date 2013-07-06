@@ -70,8 +70,8 @@
 
                     var thisWeeksCommits = data[51].days;
                     var lastWeeksCommits = data[50].days;
-                    var twoWeeksCommits = lastWeeksCommits.concat(thisWeeksCommits);
-                    var dayIndex = new Date().getDay();
+                    var twoWeeksCommits  = lastWeeksCommits.concat(thisWeeksCommits);
+                    var dayIndex         = new Date().getDay();
 
                     // Organize the x-axis days depending the day of the week
                     var thisWeeksDays = new Array(7);
