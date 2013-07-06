@@ -152,9 +152,6 @@
             // Allow user to override gitGraph defaults
             plugin.settings = $.extend({}, settings, options);
 
-            console.log(options.html);
-            console.log(settings.html);
-
             // Create the Morris.js graph based on the user provided data.
             return this,
                 Morris.Line({
