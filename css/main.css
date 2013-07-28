@@ -3,6 +3,40 @@ body {
   padding-bottom: 40px;
 }
 
+.users-search {
+  margin-bottom: 20px;
+}
+
+.tt-dropdown-menu {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  min-width: 218px;
+  top: 80% !important;
+}
+
+img {
+  height: 35px;
+  width: 35px;
+  margin-right: 15px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.search-suggestion {
+  margin-left: 18px;
+}
+.tt-suggestion {
+  text-align: left;
+  padding: 7px 15px 7px 15px;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+  background: #e6e6e6;
+}
+
 /* Custom container */
 .container-narrow {
   margin: 0 auto;

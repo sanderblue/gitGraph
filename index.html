@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
     <link href="css/morris.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.responsive.min.css" rel="stylesheet">
@@ -41,12 +44,7 @@
         <!-- GitGraph Chart -->
         <div id="myGitGraph" style="height: 300px; width:660px;"></div>
 
-        <select id="users" class="github-users-dropdown">
-          <option value="">Choose a GitHub user</option>
-          <option value="sanderblue">sanderblue</option>
-          <option value="sstjohn">sstjohn</option> <!-- corewar-evolution -->
-          <option value="edx">edx</option>
-        </select>
+        <input type="text" id="search" class="users-search" placeholder="Search GitHub Users..." autocomplete="off" spellcheck="false">
 
         <select id="user-repo-options" class="github-repos-dropdown"></select>
 
@@ -87,13 +85,11 @@
 
     </div> <!-- /container -->
 
-  <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
   <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/vendor/raphael.min.js"></script>
   <script type="text/javascript" src="js/vendor/morris.min.js"></script>
   <script type="text/javascript" src="js/vendor/moment.min.js"></script>
+  <script type="text/javascript" src="js/vendor/typeahead.min.js"></script>
   <script type="text/javascript" src="js/gitGraph.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-
 
 </body></html>

@@ -27,21 +27,25 @@
 (function($) {
 
     $.gitGraph = function(element, options) {
-        console.log(options);
+        console.log("Git Graph options: ", options);
 
         var commit_data = new getCommitData();
         var repoCommits = commit_data.data;
 
-        function git(settings) {
-            window[settings] = {
+        var b = function (settings) {
+
+            return object = {
                     html: options.html,
                     user: options.user,
                     repo: options.repo,
                     gitData: repoCommits
                 };
-            }
+        }
 
-        git('bar');
+        var f = new b();
+
+        console.log("test", f() );
+
 
         var settings = {
             html: bar.html,
@@ -49,24 +53,25 @@
             repo: bar.repo,
             git: repoCommits
         };
-        // console.log(settings);
+        console.log("Settings: ", settings);
 
         function getCommitData() {
             git('bar');
 
             var user = bar.user;
             var repo = bar.repo;
-            var statsURL = 'https://api.github.com/repos/'+ user +'/'+ repo +'/stats/commit_activity';
+            var statsURL = 'https://api.github.com/repos/'+user+'/'+repo+'/stats/commit_activity';
             var result = "";
+
+            console.log("Stats URL from options: ", statsURL);
+            console.log("Empty result? ", statsURL);
 
             $.ajax({
                 url: statsURL,
-                async: false,
                 dataType: 'json',
-                error: function(httpRequest, textStatus, errorThrown) {
-                  alert("Please make sure your username and repository information is correct. Status: " + textStatus + "\n\nError: " + errorThrown);
-                },
                 success: function (data, day_data, user, repo) {
+
+                    console.log("Data", data);
 
                     var thisWeeksCommits = data[51].days;
                     var lastWeeksCommits = data[50].days;
@@ -131,6 +136,9 @@
                     ];
 
                     result = day_data;
+                },
+                error: function(httpRequest, textStatus, errorThrown) {
+                  alert("Please make sure your username and repository information is correct. Status: " + textStatus + "\n\nError: " + errorThrown);
                 }
             });
             result = { "data": result, "user": user, "repo": repo }; // for double checking

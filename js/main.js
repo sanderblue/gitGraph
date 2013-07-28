@@ -2,55 +2,121 @@ $(function($){
 
     var apiURL = 'https://api.github.com';
 
-    $('.github-users-dropdown').on('change', function () {
+    var searchURL        = 'https://api.github.com/users';
+    var local_users_data = 'js/data/users.json';
 
-        var changed_user_value = $(this).val();
-
-        console.log(changed_user_value);
-
-        var userReposURL = 'https://api.github.com/users/'+ changed_user_value +'/repos'
-
-        var getUserRepos = function () {
-            return $.ajax({
-                url: userReposURL,
-                type: 'GET',
-                contentType: 'json',
-                dataType: 'json'
-            });
-        };
-
-        $.when(getUserRepos()).done(function (data) {
-            console.log("Promise done: ", data);
-
-            var optionsDiv = $('#user-repo-options');
-
-            $(optionsDiv).children().remove();
-
-            $.each(data, function () {
-                var h = $('<option>').val(this.name).text(this.name);
-
-                $(h).appendTo(optionsDiv);
-            });
+    var getUsers = $.ajax({
+            url: local_users_data,
+            type: 'GET',
+            contentType: 'json',
+            dataType: 'json'
         });
 
-        $('.github-repos-dropdown').on('change', function() {
+    $.when(getUsers).done(function (users) {
 
-            var existingGraph     = $('body').find('#myGitGraph').replaceWith('<div id="myGitGraph" style="height: 300px; width:660px;">');
-            var change_repo_value = $(this).val();
+        // The built typeahead "datums"
+        user_datums = [];
 
-            console.log(change_repo_value);
-            // var newGraph = new changedGitGraph();
+        $.each(users, function (i, user) {
+            var user = {
+                value: user.login,
+                tokens: [
+                    user.login,
+                    user.email
+                ],
+                id: user.id,
+                email: user.email,
+                url: user.html_url,
+                avatar: user.avatar_url
+            }
+            user_datums.push(user);
+        });
 
-            // $(existingGraph).replaceWith(newGraph);
+        console.log(user_datums);
 
-            $( "#myGitGraph" ).gitGraph({
-                html: "myGitGraph",
-                user: changed_user_value,
-                repo: change_repo_value
+        $('.users-search')
+            .typeahead([
+            {
+              name: 'users',
+              local: user_datums,
+              template: function(data) { return '<span class="search_suggestion"><img src="'+ data.avatar +'" class="user_avatar">'+ data.value +'</span>'; }
+            }
+        ])
+
+        $.fn.enterKey = function (fnc) {
+            return this.each(function () {
+
+                console.log("this", this);
+
+                $(this).keypress(function (ev) {
+
+                    var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+                    if (keycode == '13') {
+
+                        console.log("Funcion", ev.keyCode );
+
+                        fnc.call(this, ev);
+                    }
+                })
+            })
+        }
+
+        $('#search').on('keydown', function (event) {
+
+            console.log($('.tt-suggestion'));
+
+            $('.tt-suggestion').on('click', function (event) {
+                console.log('Clicked!', event.target);
             });
 
+        }).enterKey(function (event) {
+            console.log('Enter!', event.target.value);
         });
+
     });
+
+
+    // $.when(getUserRepos()).done(function (data) {
+    //     // console.log("Promise done: ", data);
+
+    //     var optionsDiv = $('#user-users-options');
+
+    //     $(optionsDiv).children().remove();
+
+    //     $.each(data, function () {
+
+    //         // $('<option>').val(this.name).text(this.name);
+    //         console.log("Promise done: ", data);
+
+    //         $(optionsDiv).append('<option value=' + this.name + '>' + this.name + '</option>');
+    //     });
+    // });
+
+    $('.github-users-dropdown').on('change', function() {
+
+        console.log("User value: ", user_value );
+
+        // var existingGraph = $('body').find('#myGitGraph').replaceWith('<div id="myGitGraph" style="height: 300px; width:660px;">');
+
+        var user_value = $(user_value).val()
+        var repo_value = $(this).val();
+
+        console.log("User value", user_value);
+        console.log("Changed repo value", repo_value);
+
+        var b = getUserRepos(user_value);
+
+        // $( "#myGitGraph" ).gitGraph({
+        //     html: "myGitGraph",
+        //     user: user_value,
+        //     repo: changed_repo_value
+        // });
+
+    });
+
+    var user_value = function (value) {
+        console.log("User value function fired", value);
+    }
 
     // var user = changed_user_value;
 
