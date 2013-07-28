@@ -12,6 +12,9 @@ Dependencies
 [Morris.js](http://oesmith.github.com/morris.js/),
 [Moment.js](http://momentjs.com/)
 
+Download
+========
+[GitGraph](http://www.sander.com/datahost/gitGraph/gitgraph.js)
 
 Usage
 =====

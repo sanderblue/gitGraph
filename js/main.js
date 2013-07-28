@@ -61,6 +61,17 @@ $(function($){
             })
         }
 
+        var buildGitGraph = function(user, repo) {
+
+            console.log("Build graph: ", user, repo)
+
+            $( "#myGitGraph" ).gitGraph({
+                html: "myGitGraph",
+                user: user,
+                repo: repo
+            });
+        }
+
         var buildDropdown = function (username) {
 
             var userReposURL = apiURL + '/users/'+ username +'/repos';
@@ -76,9 +87,9 @@ $(function($){
 
                 var repo_options_element = $('#user-repo-options');
 
-                $(repo_options_element).children().remove();
+                console.log(repo_options_element)
 
-                console.log(repo_options_element);
+                $(repo_options_element).children().remove();
 
                 $.each(repos, function (i, repo) {
 
@@ -86,6 +97,17 @@ $(function($){
 
                     $(repo_options_element).append('<option value='+ repo_name +'>'+ repo_name +'</option>');
 
+                });
+
+                $(repo_options_element).on('change', function () {
+
+                    var username_value = $('#search').val();
+                    var repo_value     = $(this).val();
+
+                    console.log("username: ", username_value);
+                    console.log("repo: ", repo_value);
+
+                    return new buildGitGraph(username_value, repo_value);
                 });
 
             });
@@ -102,7 +124,11 @@ $(function($){
             });
 
         }).enterKey(function (event) {
-            console.log('Enter!', event.target.value);
+            console.log('Enter!', event.target);
+
+            var username = event.target.value;
+
+            return new buildDropdown(username);
         });
 
     });
