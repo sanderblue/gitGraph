@@ -1,5 +1,11 @@
 $(function($){
 
+    $('#myGitGraph').gitGraph({
+        html: 'myGitGraph',
+        user: 'sanderblue',
+        repo:  'gitGraph'
+    });
+
     var apiURL = 'https://api.github.com';
 
     var searchURL        = 'https://api.github.com/users';
@@ -32,8 +38,6 @@ $(function($){
             user_datums.push(user);
         });
 
-        console.log(user_datums);
-
         $('.users-search')
             .typeahead([
             {
@@ -63,17 +67,18 @@ $(function($){
 
         var buildGitGraph = function(user, repo) {
 
-            console.log("Build graph: ", user, repo)
+            console.log("Build graph: ", user, repo);
 
-            $("#myGitGraph").remove();
+            // if (repo == !undefined)
+            $('.lead').after('<div id="myGitGraph" style="height: 300px; width:660px;"></div>');
 
-            $('.lead').after('<div id="myGitGraph" style="height: 300px; width:660px;"></div>')
-
-            return $( "#myGitGraph" ).gitGraph({
+            $( "#myGitGraph" ).gitGraph({
                 html: "myGitGraph",
                 user: user,
                 repo: repo
             });
+
+            // return [user, repo];
         }
 
         var buildDropdown = function (username) {
@@ -105,6 +110,8 @@ $(function($){
 
                     var username_value = $('#search').val();
                     var repo_value     = $(this).val();
+
+                    $("#myGitGraph").remove();
 
                     return new buildGitGraph(username_value, repo_value);
                 });

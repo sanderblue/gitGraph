@@ -34,21 +34,24 @@
         var plugin        = this;
         var graph_element = element;
 
-        function git(settings) {
-            window[settings] = {
-                    html: options.html,
-                    user: options.user,
-                    repo: options.repo,
-                    commits: []
-                };
-            }
+        // function git(settings) {
 
-        git('bar');
+        //     console.log("window settings: ", );
+
+        //     window[settings] = {
+        //             html: options.html,
+        //             user: options.user,
+        //             repo: options.repo,
+        //             commits: settings.commits
+        //         };
+        //     }
+
+        // git('bar');
 
         var settings = {
-            html: bar.html,
-            user: bar.user,
-            repo: bar.repo,
+            html: options.html,
+            user: options.user,
+            repo: options.repo,
             commits: []
         };
 
@@ -63,7 +66,7 @@
 
         $.when(getCommits).done(function (data, b) {
 
-            console.log("promise data: ", data, b);
+            // console.log("promise data: ", data, b);
 
             var thisWeeksCommits = data[51].days;
             var lastWeeksCommits = data[50].days;
@@ -126,48 +129,43 @@
                 { "dayOfWeek": thisWeeksDays[1], "commits": commitsObj.g[5] },
                 { "dayOfWeek": thisWeeksDays[0], "commits": commitsObj.g[6] }
             ];
-            result = day_data;
 
-            $.each(day_data, function (i, commit_count) {
-                plugin.settings.commits.push(commit_count)
-            });
+            plugin.settings = {} // this holds the merged default and user-provided options
+
+            var $element = $(graph_element),
+                 element = graph_element;
+
+            // the "constructor"
+            plugin.init = function() {
+
+                // Allow user to override gitGraph defaults
+                plugin.settings = $.extend({}, settings, options);
+
+                console.log("Plugin: ", plugin);
+                console.log("Commits", plugin.settings.commits);
+
+                // Create the Morris.js graph based on the user provided data.
+                return this,
+                    Morris.Line({
+                        element: settings.html, // soon to become an option for the user to specify
+                        data: day_data,
+                        xkey: 'dayOfWeek',
+                        ykeys: ['commits'],
+                        labels: ['commits'],
+                        lineWidth: 1.75,
+                        lineColors:['#479201'],
+                        pointSize: 2.75,
+                        pointWidths: [1],
+                        pointStrokeColors: ['#ffffff'],
+                        smooth: true,
+                        continuousLine: true,
+                        hideHover: true,
+                        gridTextSize: 10,
+                        parseTime: false // Turns off auto time parsing of the x-axis values
+                    });
+            }
+            plugin.init();
         });
-
-        plugin.settings = {} // this holds the merged default and user-provided options
-
-        var $element = $(graph_element),
-             element = graph_element;
-
-        // the "constructor"
-        plugin.init = function() {
-
-            // Allow user to override gitGraph defaults
-            plugin.settings = $.extend({}, settings, options);
-
-            console.log("Plugin: ", plugin);
-            console.log("Settings", settings);
-
-            // Create the Morris.js graph based on the user provided data.
-            return this,
-                Morris.Line({
-                    element: settings.html, // soon to become an option for the user to specify
-                    data: settings.commits,
-                    xkey: 'dayOfWeek',
-                    ykeys: ['commits'],
-                    labels: ['commits'],
-                    lineWidth: 1.75,
-                    lineColors:['#479201'],
-                    pointSize: 2.75,
-                    pointWidths: [1],
-                    pointStrokeColors: ['#ffffff'],
-                    smooth: true,
-                    continuousLine: true,
-                    hideHover: true,
-                    gridTextSize: 10,
-                    parseTime: false // Turns off auto time parsing of the x-axis values
-                });
-        }
-        plugin.init();
     }
 
     $.fn.gitGraph = function(options) {
