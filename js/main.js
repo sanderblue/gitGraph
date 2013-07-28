@@ -49,16 +49,10 @@ $(function($){
 
         $.fn.enterKey = function (fnc) {
             return this.each(function () {
-
-                console.log("this", this);
-
                 $(this).keypress(function (ev) {
-
                     var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+
                     if (keycode == '13') {
-
-                        console.log("Funcion", ev.keyCode );
-
                         fnc.call(this, ev);
                     }
                 })
@@ -66,10 +60,6 @@ $(function($){
         }
 
         var buildGitGraph = function(user, repo) {
-
-            console.log("Build graph: ", user, repo);
-
-            // if (repo == !undefined)
             $('.lead').after('<div id="myGitGraph" style="height: 300px; width:660px;"></div>');
 
             $( "#myGitGraph" ).gitGraph({
@@ -77,8 +67,6 @@ $(function($){
                 user: user,
                 repo: repo
             });
-
-            // return [user, repo];
         }
 
         var buildDropdown = function (username) {
@@ -119,19 +107,15 @@ $(function($){
             });
         };
 
-
         $('#search').on('keydown', function (event) {
 
             $('.tt-suggestion').on('click', function (event) {
-                console.log('Clicked! Here is the user: ', $(event.target).text() );
                 var username = $(event.target).text();
 
                 return new buildDropdown(username);
             });
 
         }).enterKey(function (event) {
-            console.log('Enter!', event.target);
-
             var username = event.target.value;
 
             return new buildDropdown(username);
