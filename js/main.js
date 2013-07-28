@@ -61,12 +61,44 @@ $(function($){
             })
         }
 
+        var buildDropdown = function (username) {
+
+            var userReposURL = apiURL + '/users/'+ username +'/repos';
+
+            var getRepos = $.ajax({
+                                url: userReposURL,
+                                type: 'GET',
+                                contentType: 'json',
+                                dataType: 'json'
+                            });
+
+            $.when(getRepos).done(function (repos) {
+
+                var repo_options_element = $('#user-repo-options');
+
+                $(repo_options_element).children().remove();
+
+                console.log(repo_options_element);
+
+                $.each(repos, function (i, repo) {
+
+                    var repo_name = repo.name;
+
+                    $(repo_options_element).append('<option value='+ repo_name +'>'+ repo_name +'</option>');
+
+                });
+
+            });
+        };
+
+
         $('#search').on('keydown', function (event) {
 
-            console.log($('.tt-suggestion'));
-
             $('.tt-suggestion').on('click', function (event) {
-                console.log('Clicked!', event.target);
+                console.log('Clicked! Here is the user: ', $(event.target).text() );
+                var username = $(event.target).text();
+
+                return new buildDropdown(username);
             });
 
         }).enterKey(function (event) {

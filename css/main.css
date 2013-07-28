@@ -3,6 +3,11 @@ body {
   padding-bottom: 40px;
 }
 
+.github-repos-dropdown {
+  margin-top: 18px;
+  margin-left: 15px;
+}
+
 .users-search {
   margin-bottom: 20px;
 }
