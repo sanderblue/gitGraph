@@ -65,7 +65,11 @@ $(function($){
 
             console.log("Build graph: ", user, repo)
 
-            $( "#myGitGraph" ).gitGraph({
+            $("#myGitGraph").remove();
+
+            $('.lead').after('<div id="myGitGraph" style="height: 300px; width:660px;"></div>')
+
+            return $( "#myGitGraph" ).gitGraph({
                 html: "myGitGraph",
                 user: user,
                 repo: repo
@@ -87,8 +91,6 @@ $(function($){
 
                 var repo_options_element = $('#user-repo-options');
 
-                console.log(repo_options_element)
-
                 $(repo_options_element).children().remove();
 
                 $.each(repos, function (i, repo) {
@@ -103,9 +105,6 @@ $(function($){
 
                     var username_value = $('#search').val();
                     var repo_value     = $(this).val();
-
-                    console.log("username: ", username_value);
-                    console.log("repo: ", repo_value);
 
                     return new buildGitGraph(username_value, repo_value);
                 });
@@ -132,78 +131,4 @@ $(function($){
         });
 
     });
-
-
-    // $.when(getUserRepos()).done(function (data) {
-    //     // console.log("Promise done: ", data);
-
-    //     var optionsDiv = $('#user-users-options');
-
-    //     $(optionsDiv).children().remove();
-
-    //     $.each(data, function () {
-
-    //         // $('<option>').val(this.name).text(this.name);
-    //         console.log("Promise done: ", data);
-
-    //         $(optionsDiv).append('<option value=' + this.name + '>' + this.name + '</option>');
-    //     });
-    // });
-
-    $('.github-users-dropdown').on('change', function() {
-
-        console.log("User value: ", user_value );
-
-        // var existingGraph = $('body').find('#myGitGraph').replaceWith('<div id="myGitGraph" style="height: 300px; width:660px;">');
-
-        var user_value = $(user_value).val()
-        var repo_value = $(this).val();
-
-        console.log("User value", user_value);
-        console.log("Changed repo value", repo_value);
-
-        var b = getUserRepos(user_value);
-
-        // $( "#myGitGraph" ).gitGraph({
-        //     html: "myGitGraph",
-        //     user: user_value,
-        //     repo: changed_repo_value
-        // });
-
-    });
-
-    var user_value = function (value) {
-        console.log("User value function fired", value);
-    }
-
-    // var user = changed_user_value;
-
-
-    // + repo +'/stats/commit_activity';
-
-    // var getGitHubData = function () {
-    //     // var userSearchURL = apiURL + '/legacy/user/search/sanderblue';
-    //     var userSearchURL = apiURL + '/users/1';
-
-    //     return $.ajax({
-    //             url: userSearchURL,
-    //             type: 'GET',
-    //             contentType: 'json',
-    //             dataType: 'json'
-    //         });
-    // };
-
-    // // var userRepoURL = apiURL + 'repos/'+ user +'/'+ repo +'/stats/commit_activity';
-
-    // $.when(getGitHubData()).done(function (data) {
-    //     console.log("Promise done: ", data);
-
-    //     var optionsDiv = $('#users');
-
-    //     $.each(data, function () {
-    //         var h = $('<option>').val(this.login).text(this.login);
-
-    //         $(h).appendTo(optionsDiv);
-    //     });
-    // });
 });
