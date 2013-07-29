@@ -8,17 +8,19 @@ $(function($){
 
     var apiURL = 'https://api.github.com';
 
-    var searchURL        = 'https://api.github.com/users';
+    var searchURL        = 'https://api.github.com/users?since';
     var local_users_data = 'js/data/users.json';
 
     var getUsers = $.ajax({
-            url: local_users_data,
+            url: searchURL,
             type: 'GET',
             contentType: 'json',
             dataType: 'json'
         });
 
     $.when(getUsers).done(function (users) {
+
+        console.log("Users", users);
 
         // The built typeahead "datums"
         user_datums = [];
@@ -60,7 +62,12 @@ $(function($){
         }
 
         var buildGitGraph = function(user, repo) {
-            $('.lead').after('<div id="myGitGraph" style="height: 300px; width:660px;"></div>');
+
+            console.log("build git graph", user, repo)
+
+            // $('.lead').after('<div id="myGitGraph" style="height: 300px; width:660px;"></div>');
+
+            $("#myGitGraph").replaceWith('<div id="myGitGraph" style="height: 300px; width:660px;"></div>');
 
             $( "#myGitGraph" ).gitGraph({
                 html: "myGitGraph",
@@ -98,8 +105,6 @@ $(function($){
 
                     var username_value = $('#search').val();
                     var repo_value     = $(this).val();
-
-                    $("#myGitGraph").remove();
 
                     return new buildGitGraph(username_value, repo_value);
                 });

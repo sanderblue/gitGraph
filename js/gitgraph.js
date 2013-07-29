@@ -28,25 +28,25 @@
 
     var self = this;
 
-    $.gitGraph = function(element, options) {
-        console.log("Git Graph options: ", options);
+    $.fn.gitGraph = function(options) {
 
+        console.log("OPTIONS", options);
+
+        return this.each(function () {
+
+            if (undefined == $(this).data('gitGraph')) {
+
+                var plugin = new $.gitGraph(this, options);
+
+                $(this).data('gitGraph', plugin);
+            }
+
+        });
+    };
+
+    $.gitGraph = function(element, options) {
         var plugin        = this;
         var graph_element = element;
-
-        // function git(settings) {
-
-        //     console.log("window settings: ", );
-
-        //     window[settings] = {
-        //             html: options.html,
-        //             user: options.user,
-        //             repo: options.repo,
-        //             commits: settings.commits
-        //         };
-        //     }
-
-        // git('bar');
 
         var settings = {
             html: options.html,
@@ -55,18 +55,31 @@
             commits: []
         };
 
+        //?access_token=645e5ee9371612aa06497f5f9435e55f083f47d7
+
         var statsURL = 'https://api.github.com/repos/'+settings.user+'/'+settings.repo+'/stats/commit_activity';
 
-        var getCommits = $.ajax({
+        var getCommits = function () {
+                return $.ajax({
                         url: statsURL,
                         type: 'GET',
-                        contentType: 'json',
+                        // contentType: 'json',
                         dataType: 'json'
                     });
+                };
 
-        $.when(getCommits).done(function (data, b) {
+        $.when(getCommits()).done(function (data, b) {
 
-            // console.log("promise data: ", data, b);
+            if ($.isEmptyObject(data)) {
+                console.log(graph_element);
+
+                var height     = $(graph_element).height();
+                var width      = $(graph_element).width();
+                var element_id = $(graph_element).attr('id');
+
+                $(graph_element).append('Something wasn\'t quite right. The data set was empty! Please try again.');
+            }
+            console.log("promise data: ", data, b);
 
             var thisWeeksCommits = data[51].days;
             var lastWeeksCommits = data[50].days;
@@ -141,8 +154,8 @@
                 // Allow user to override gitGraph defaults
                 plugin.settings = $.extend({}, settings, options);
 
-                console.log("Plugin: ", plugin);
-                console.log("Commits", plugin.settings.commits);
+                // console.log("Plugin: ", plugin);
+                // console.log("Commits", plugin.settings.commits);
 
                 // Create the Morris.js graph based on the user provided data.
                 return this,
@@ -165,19 +178,25 @@
                     });
             }
             plugin.init();
-        });
-    }
+        }).fail(function (jqxhr, error, auth) {
+            console.log("FAILED: ", error, auth);
 
-    $.fn.gitGraph = function(options) {
-        return this.each(function () {
-            if (undefined == $(this).data('gitGraph')) {
-
-                var plugin = new $.gitGraph(this, options);
-
-                $(this).data('gitGraph', plugin);
+            if (graph_element.innerHTML === "") {
+                $(graph_element).append('There was a issue retrieving the data, please try again.');
             }
 
+        // return false;
         });
+
+        return this;
     }
+
+    // $.fn.gitGraph = function () {
+    //     return this.each(function () {
+
+    //         console.log("fn", this);
+    //         // do some plugin stuff.
+    //     });
+    // };
 
 })(jQuery);
