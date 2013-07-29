@@ -30,8 +30,6 @@
 
     $.fn.gitGraph = function(options) {
 
-        console.log("OPTIONS", options);
-
         return this.each(function () {
 
             if (undefined == $(this).data('gitGraph')) {
@@ -40,7 +38,6 @@
 
                 $(this).data('gitGraph', plugin);
             }
-
         });
     };
 
@@ -55,15 +52,13 @@
             commits: []
         };
 
-        //?access_token=645e5ee9371612aa06497f5f9435e55f083f47d7
-
         var statsURL = 'https://api.github.com/repos/'+settings.user+'/'+settings.repo+'/stats/commit_activity';
 
         var getCommits = function () {
                 return $.ajax({
                         url: statsURL,
                         type: 'GET',
-                        // contentType: 'json',
+                        contentType: 'json',
                         dataType: 'json'
                     });
                 };
@@ -79,7 +74,6 @@
 
                 $(graph_element).append('Something wasn\'t quite right. The data set was empty! Please try again.');
             }
-            console.log("promise data: ", data, b);
 
             var thisWeeksCommits = data[51].days;
             var lastWeeksCommits = data[50].days;
@@ -154,9 +148,6 @@
                 // Allow user to override gitGraph defaults
                 plugin.settings = $.extend({}, settings, options);
 
-                // console.log("Plugin: ", plugin);
-                // console.log("Commits", plugin.settings.commits);
-
                 // Create the Morris.js graph based on the user provided data.
                 return this,
                     Morris.Line({
@@ -178,25 +169,12 @@
                     });
             }
             plugin.init();
-        }).fail(function (jqxhr, error, auth) {
-            console.log("FAILED: ", error, auth);
 
+        }).fail(function (jqxhr, error, auth) {
             if (graph_element.innerHTML === "") {
                 $(graph_element).append('There was a issue retrieving the data, please try again.');
             }
-
-        // return false;
         });
-
-        return this;
     }
-
-    // $.fn.gitGraph = function () {
-    //     return this.each(function () {
-
-    //         console.log("fn", this);
-    //         // do some plugin stuff.
-    //     });
-    // };
 
 })(jQuery);

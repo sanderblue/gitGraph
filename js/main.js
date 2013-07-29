@@ -6,13 +6,12 @@ $(function($){
         repo:  'gitGraph'
     });
 
-    var apiURL = 'https://api.github.com';
-
-    var searchURL        = 'https://api.github.com/users?since';
+    var apiURL           = 'https://api.github.com';
+    var searchURL        = apiURL + '/users';
     var local_users_data = 'js/data/users.json';
 
     var getUsers = $.ajax({
-            url: searchURL,
+            url: local_users_data,
             type: 'GET',
             contentType: 'json',
             dataType: 'json'
@@ -64,8 +63,6 @@ $(function($){
         var buildGitGraph = function(user, repo) {
 
             console.log("build git graph", user, repo)
-
-            // $('.lead').after('<div id="myGitGraph" style="height: 300px; width:660px;"></div>');
 
             $("#myGitGraph").replaceWith('<div id="myGitGraph" style="height: 300px; width:660px;"></div>');
 
