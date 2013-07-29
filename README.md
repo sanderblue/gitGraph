@@ -14,7 +14,7 @@ Dependencies
 
 Download
 ========
-[GitGraph Source Code](http://www.sander.com/datahost/gitGraph/gitgraph.js)
+[GitGraph Source Code](http://www.sanderblue.com/datahost/gitGraph/gitgraph.js)
 
 Usage
 =====
