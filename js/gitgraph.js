@@ -137,7 +137,7 @@
                 { "dayOfWeek": thisWeeksDays[0], "commits": commitsObj.g[6] }
             ];
 
-            plugin.settings = {} // this holds the merged default and user-provided options
+            plugin.settings = {}
 
             var $element = $(graph_element),
                  element = graph_element;
@@ -145,13 +145,12 @@
             // the "constructor"
             plugin.init = function() {
 
-                // Allow user to override gitGraph defaults
                 plugin.settings = $.extend({}, settings, options);
 
                 // Create the Morris.js graph based on the user provided data.
                 return this,
                     Morris.Line({
-                        element: settings.html, // soon to become an option for the user to specify
+                        element: settings.html,
                         data: day_data,
                         xkey: 'dayOfWeek',
                         ykeys: ['commits'],
