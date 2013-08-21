@@ -15,6 +15,7 @@ Dependencies
 Download
 ========
 [GitGraph Source Code](http://www.sanderblue.com/files/gitgraph.js)
+
 [GitGraph Minified](http://www.sanderblue.com/files/gitgraph.min.js)
 
 Usage
