@@ -154,7 +154,7 @@
                         data: day_data,
                         xkey: 'dayOfWeek',
                         ykeys: ['commits'],
-                        labels: ['commits'],
+                        labels: ['Commits'],
                         lineWidth: 1.75,
                         lineColors:['#479201'],
                         pointSize: 2.75,
