@@ -66,8 +66,6 @@
         $.when(getCommits()).done(function (data, b) {
 
             if ($.isEmptyObject(data)) {
-                console.log(graph_element);
-
                 var height     = $(graph_element).height();
                 var width      = $(graph_element).width();
                 var element_id = $(graph_element).attr('id');
